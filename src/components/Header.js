@@ -40,9 +40,11 @@ export default Header
 
 const HeaderWrap = styled.header`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  margin: auto;
+  padding: 0 20px;
+  max-width: 1140px;
   height: 50px;
   background-color: #fff;
 `

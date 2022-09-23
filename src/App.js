@@ -5,7 +5,6 @@ import GlobalStyle from './styles/GlobalStyle'
 import Index from './pages/Index'
 import { Login } from './pages/Login'
 import styled from 'styled-components'
-import Search from './components/Search'
 
 function App() {
   return (
@@ -13,6 +12,7 @@ function App() {
       <BrowserRouter>
         <GlobalStyle />
         <Header />
+
         <ContainerWrap>
           <Content>
             <Routes>
@@ -29,6 +29,7 @@ function App() {
 }
 
 export default App
+
 const ContainerWrap = styled.main`
   width: 100%;
   height: 100%;
