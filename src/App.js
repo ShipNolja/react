@@ -5,14 +5,22 @@ import GlobalStyle from './styles/GlobalStyle'
 import Index from './pages/Index'
 import { Login } from './pages/Login'
 import styled from 'styled-components'
+import { useEffect } from 'react'
 
 function App() {
+  const test = async () => {
+    const res = await fetch('/welcome')
+    console.log(res)
+  }
+  useEffect(() => {
+    test()
+  })
+
   return (
     <>
       <BrowserRouter>
         <GlobalStyle />
         <Header />
-
         <ContainerWrap>
           <Content>
             <Routes>
@@ -39,6 +47,6 @@ const ContainerWrap = styled.main`
 `
 
 const Content = styled.section`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 `
