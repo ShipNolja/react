@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import Colors from '../styles/Color'
-import { CustomButton } from '../UI/StyleButton'
+import React from 'react';
+import styled from 'styled-components';
+import Colors from '../styles/Color';
+import { CustomButton } from '../UI/StyleButton';
 
 const Search = () => {
   return (
@@ -19,15 +19,15 @@ const Search = () => {
         검색
       </CustomButton>
     </SearchBackgroundWrap>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
 
 const CustomInput = styled.input`
   border-radius: ${(props) => props.radius || '0'};
   padding: 0px 20px;
-`
+`;
 
 const SearchBackgroundWrap = styled.div`
   display: flex;
@@ -36,4 +36,4 @@ const SearchBackgroundWrap = styled.div`
   width: 100%;
   height: 300px;
   background-color: ${Colors.primaryDeepColor};
-`
+`;
