@@ -6,7 +6,7 @@ export const setRefreshToken = (refreshToken) => {
   const today = new Date();
   const expireDate = today.setDate(today.getDate() + 7);
 
-  return cookies.set('refresh_token', refreshToken, {
+  return cookies.set('refreshToken', refreshToken, {
     sameSite: 'strict',
     path: '/',
     expires: new Date(expireDate),
@@ -14,11 +14,11 @@ export const setRefreshToken = (refreshToken) => {
 };
 
 export const getCookieToken = () => {
-  return cookies.get('refresh_token');
+  return cookies.get('refreshToken');
 };
 
 export const removeCookieToken = () => {
-  return cookies.remove('refresh_token', { sameSite: 'strict', path: '/' });
+  return cookies.remove('refreshToken', { sameSite: 'strict', path: '/' });
 };
 
 // setRefreshToken : Refresh Token을 Cookie에 저장하기 위한 함수
