@@ -56,8 +56,7 @@ const LoginBox = styled.article`
   background-color: aliceblue;
   max-width: 800px;
   width: 100%;
-  max-height: 600px;
-  height: 100%;
+  padding: 40px 0;
   border-radius: 20px;
 `;
 
