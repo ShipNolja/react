@@ -4,34 +4,25 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 import Index from './pages/Index';
 import { Login } from './pages/Login';
-import styled from 'styled-components';
 import { useEffect } from 'react';
 import Register from './pages/Register';
-import Container from '@material-ui/core/Container';
+import Grid from '@mui/material/Grid';
 
 function App() {
-  const test = async () => {
-    const res = await fetch('/welcome');
-    console.log(res);
-  };
-  useEffect(() => {
-    test();
-  });
-
   return (
-    <>
+    <Grid container height='100vh' width='100%'>
       <BrowserRouter>
         <GlobalStyle />
         <Header />
         <Routes>
           <Route idnex path='/' element={<Index />} />
-          <Route path='/' element={<Index />} />
+          <Route path='/index' element={<Index />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>
         <Footer />
       </BrowserRouter>
-    </>
+    </Grid>
   );
 }
 
