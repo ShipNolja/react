@@ -4,7 +4,11 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Colors from '../styles/Color';
 import { CustomButton } from '../UI/StyleButton';
-import { userRegister, validateUserId, validatePhone } from '../api/register';
+import {
+  userRegister,
+  validateUserId,
+  validatePhone,
+} from '../apis/user/register';
 
 const Register = () => {
   const navigate = useNavigate();

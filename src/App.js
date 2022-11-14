@@ -3,12 +3,13 @@ import Header from './components/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 import Index from './pages/Index';
-import { Login } from './pages/Login';
+import LoginPage from './pages/LoginPage';
 import { useEffect, useState } from 'react';
-import Register from './pages/Register';
+import Register from './pages/RegisterPage';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { INQUIRE_TOKEN } from './redux/Auth/auth';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,8 +38,8 @@ function App() {
         <Routes>
           <Route idnex path='/' element={<Index />} />
           <Route path='/index' element={<Index />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
