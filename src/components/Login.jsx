@@ -3,14 +3,39 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import Colors from '../styles/Color';
 import { CustomButton } from '../UI/StyleButton';
+import { userLogin } from '../apis/user/login';
+import { setRefreshToken } from '../redux/Auth/cookie';
+import { useDispatch } from 'react-redux';
+import { SET_TOKEN } from '../redux/Auth/auth';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const idRef = useRef();
   const pwRef = useRef();
 
-  const loginHandleSubmit = (event) => {
+  const loginHandleSubmit = async (event) => {
     event.preventDefault();
-    console.log(idRef.current.value, pwRef.current.value);
+    const res = await userLogin(idRef.current.value, pwRef.current.value)();
+
+    const { accessToken, accessTokenExpireDate, refreshToken } = res.data;
+
+    if (res.statusText !== 'OK') {
+      alert('에러발생');
+      return;
+    }
+
+    setRefreshToken(refreshToken);
+    dispatch(SET_TOKEN({ accessToken, accessTokenExpireDate }));
+    localStorage.setItem('accessToken', accessToken);
+
+    navigate('/');
+
+    // 만료시간 뒤에 지우기
+    setTimeout(() => {
+      localStorage.clear();
+    }, accessTokenExpireDate);
   };
 
   return (
@@ -19,8 +44,8 @@ export const Login = () => {
         <TitleText>로그인</TitleText>
 
         <LoginForm onSubmit={loginHandleSubmit}>
-          <InputLabel id='id'>아이디</InputLabel>
-          <LoginInput id='id' type='text' ref={idRef} />
+          <InputLabel id='email'>아이디</InputLabel>
+          <LoginInput id='email' type='email' ref={idRef} />
           <InputLabel id='password'>비밀번호</InputLabel>
           <LoginInput id='password' type='password' ref={pwRef} />
           <CustomButton
@@ -30,7 +55,7 @@ export const Login = () => {
             hoverbackground={Colors.darkPrimaryColor}
             style={{ width: '100%', height: 50 }}
           >
-            회원가입
+            로그인
           </CustomButton>
         </LoginForm>
       </LoginBox>
@@ -56,8 +81,7 @@ const LoginBox = styled.article`
   background-color: aliceblue;
   max-width: 800px;
   width: 100%;
-  max-height: 600px;
-  height: 100%;
+  padding: 40px 0;
   border-radius: 20px;
 `;
 
