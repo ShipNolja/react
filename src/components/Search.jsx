@@ -2,30 +2,37 @@ import React from 'react';
 import styled from 'styled-components';
 import Colors from '../styles/Color';
 import { CustomButton } from '../UI/StyleButton';
+import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import { Box, Button } from '@mui/material';
 
 const Search = () => {
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
   return (
     <Grid xs={12} item={true} height='100%'>
       <SearchBackgroundWrap>
-        <CustomInput
-          radius='200px'
-          style={{ width: '35%', height: 50, fontSize: 20 }}
-          placeholder='검색어를 입력하세요!'
-        />
-        <CustomButton
-          hoverbackground={Colors.primaryColor}
-          radius={'200px'}
-          style={{ width: '100px', height: 50 }}
+        <Box
+          sx={{
+            width: '50%',
+            borderRadius: '15px',
+            paddingRight: '10px',
+          }}
+        >
+          <TextField
+            sx={{
+              input: { background: '#fff', borderRadius: '15px' },
+            }}
+            fullWidth
+            id='outlined-search'
+            placeholder='검색어를 입력하세요.'
+            type='search'
+          />
+        </Box>
+        <Button
+          sx={{ height: '55px', color: '#fff', borderRadius: '15px' }}
+          variant='contained'
         >
           검색
-        </CustomButton>
+        </Button>
       </SearchBackgroundWrap>
     </Grid>
   );

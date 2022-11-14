@@ -19,18 +19,23 @@ export const Login = () => {
     event.preventDefault();
     const res = await userLogin(idRef.current.value, pwRef.current.value)();
 
-    const { accessToken, accessTokenExpireDate, grantType, refreshToken } =
-      res.data;
+    const { accessToken, accessTokenExpireDate, refreshToken } = res.data;
 
     if (res.statusText !== 'OK') {
       alert('에러발생');
       return;
     }
+
     setRefreshToken(refreshToken);
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('expireTime', accessTokenExpireDate);
     dispatch(SET_TOKEN({ accessToken, accessTokenExpireDate }));
+    localStorage.setItem('accessToken', accessToken);
+
     navigate('/');
+
+    // 만료시간 뒤에 지우기
+    setTimeout(() => {
+      localStorage.clear();
+    }, accessTokenExpireDate);
   };
 
   return (

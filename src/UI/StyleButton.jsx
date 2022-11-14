@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import Colors from '../styles/Color'
+import styled from 'styled-components';
+import Colors from '../styles/Color';
 
 export const CustomButton = styled.button`
   padding: 5px;
@@ -15,4 +15,4 @@ export const CustomButton = styled.button`
     color: ${Colors.colorWhite};
     background-color: ${(props) => props.hoverbackground};
   }
-`
+`;
