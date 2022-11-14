@@ -60,7 +60,6 @@ instance.interceptors.response.use(
           response.data;
 
         setRefreshToken(refreshToken);
-
         originalRequest.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
 
         return axios(originalRequest);

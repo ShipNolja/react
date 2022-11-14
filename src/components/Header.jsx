@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import '../css/Nav.css';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Colors from '../styles/Color';
 import { CustomButton } from '../UI/StyleButton';
@@ -8,14 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { DELETE_TOKEN } from '../redux/Auth/auth';
 import instance from '../apis/axios';
-import { notInitialized } from 'react-redux/es/utils/useSyncExternalStore';
 
 const Header = ({ isAuth }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((state) => {
-    state.authToken.accessToken;
-  });
 
   const logoutHandler = () => {
     localStorage.clear();
@@ -23,14 +20,8 @@ const Header = ({ isAuth }) => {
     navigate('/');
   };
 
-  const testHandler = async () => {
-    const res = await instance.get('/user');
-
-    console.log(res.data);
-  };
-
   return (
-    <Grid xs={12} item={true}>
+    <Grid xs={12} item={true} sx={{ height: '60px' }}>
       <HeaderWrap>
         <div>
           <div>로고자리</div>
@@ -60,19 +51,16 @@ const Header = ({ isAuth }) => {
         {isAuth && (
           <>
             <ButtonWrap>
-              <Link
+              <NavLink
                 to='/fishing'
-                style={{
-                  marginRight: '10px',
-                  textDecoration: 'none',
-                  color: 'black',
-                }}
+                className='nav'
+                style={{ margin: '0px 10px' }}
               >
                 실시간예약
-              </Link>
-              <Link to='/shiplist' style={{ textDecoration: 'none' }}>
+              </NavLink>
+              <NavLink to='/shiplist' className='nav'>
                 선상검색
-              </Link>
+              </NavLink>
             </ButtonWrap>
 
             <ButtonWrap>
@@ -108,7 +96,7 @@ const HeaderWrap = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 0;
   background-color: #fff;
 `;
 

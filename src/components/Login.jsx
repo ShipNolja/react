@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import Colors from '../styles/Color';
 import { CustomButton } from '../UI/StyleButton';
 import { userLogin } from '../apis/user/login';
+import { setUserInfo } from '../utils/getUserInfo';
 import { setRefreshToken } from '../redux/Auth/cookie';
 import { useDispatch } from 'react-redux';
 import { SET_TOKEN } from '../redux/Auth/auth';
 import { useNavigate } from 'react-router-dom';
+import { SET_USER } from '../redux/user/user';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,6 @@ export const Login = () => {
     setRefreshToken(refreshToken);
     dispatch(SET_TOKEN({ accessToken, accessTokenExpireDate }));
     localStorage.setItem('accessToken', accessToken);
-
     navigate('/');
 
     // 만료시간 뒤에 지우기
