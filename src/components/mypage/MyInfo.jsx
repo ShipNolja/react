@@ -1,10 +1,12 @@
 import { Box, Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
-import { useSelector } from 'react-redux';
+import MyPageNav from './MyPageNav';
 
-const MyPage = ({ refreshUserInfoHandler }) => {
-  const { userid, name, phone, role } = useSelector((state) => state.user);
+const MyPage = () => {
+  const { userid, name, phone, role } = JSON.parse(
+    localStorage.getItem('user'),
+  );
 
   return (
     <>
@@ -13,12 +15,21 @@ const MyPage = ({ refreshUserInfoHandler }) => {
           <Box
             style={{
               display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <h1 style={{ fontSize: '20px' }}>내 정보</h1>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box
+            style={{
+              display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
-            p={2}
           >
-            <h1>마이페이지</h1>
             <TextField
               style={{ width: '50%' }}
               id='outlined-read-only-input'

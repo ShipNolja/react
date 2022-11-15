@@ -31,6 +31,7 @@ export const Login = () => {
     setRefreshToken(refreshToken);
     dispatch(SET_TOKEN({ accessToken, accessTokenExpireDate }));
     localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('expireTime', accessTokenExpireDate);
     navigate('/');
 
     // 만료시간 뒤에 지우기
