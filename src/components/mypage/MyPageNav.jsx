@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 const MyPageNav = () => {
+  const [value, setValue] = useState(0);
   const navigate = useNavigate();
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <nav>
       <Grid item sm={12}>
@@ -19,15 +27,17 @@ const MyPageNav = () => {
             margin: '30px 0px',
           }}
         >
-          <Button variant='outlined' onClick={() => navigate('profile')}>
-            내 정보
-          </Button>
-          <Button variant='outlined' onClick={() => navigate('reservation')}>
-            예약정보
-          </Button>
-          <Button variant='outlined' onClick={() => navigate('shopRegister')}>
-            사업자등록
-          </Button>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant='scrollable'
+            scrollButtons='auto'
+            aria-label='scrollable auto tabs'
+          >
+            <Tab label='내정보' onClick={() => navigate('profile')} />
+            <Tab label='예약정보' onClick={() => navigate('reservation')} />
+            <Tab label='사업자등록' onClick={() => navigate('shopRegister')} />
+          </Tabs>
         </Box>
       </Grid>
     </nav>
