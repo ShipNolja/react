@@ -1,15 +1,20 @@
-import Footer from './components/Footer';
-import Header from './components/Header';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
+
+import Footer from './components/Footer';
+import Header from './components/Header';
 import Index from './pages/Index';
 import LoginPage from './pages/LoginPage';
-import { useEffect, useState } from 'react';
-import Register from './pages/RegisterPage';
-import Grid from '@mui/material/Grid';
+import RegisterPage from './pages/RegisterPage';
+import MyPage from './pages/MyPage';
+import MyInfo from './components/mypage/MyInfo';
+import ShipRegister from './components/ShipRegister';
+
+import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { INQUIRE_TOKEN } from './redux/Auth/auth';
-import RegisterPage from './pages/RegisterPage';
+import { getUserInfo } from './apis/user/users';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,10 +22,18 @@ function App() {
   const expireTime = localStorage.getItem('expireTime');
 
   const [isLoginAuth, setIsLoginAuth] = useState(false);
-  const isAuth = useSelector((state) => state.authToken.authenticated);
+  const isAuth = useSelector((state) => state.token.authenticated);
+
+  // ! 유저 정보 localStroage 담아주기
+  const refreshUserInfoHandler = async () => {
+    const data = await getUserInfo()();
+    const { userid, name, phone, role } = data.data;
+    localStorage.setItem('user', JSON.stringify({ userid, name, phone, role }));
+  };
 
   useEffect(() => {
     setIsLoginAuth(isAuth);
+    refreshUserInfoHandler();
   }, [isAuth]);
 
   useEffect(() => {
@@ -31,19 +44,21 @@ function App() {
   }, []);
 
   return (
-    <Grid container height='100vh' width='100%'>
-      <BrowserRouter>
-        <GlobalStyle />
-        <Header isAuth={isLoginAuth} />
+    <BrowserRouter>
+      <GlobalStyle />
+      <Header isAuth={isLoginAuth} />
+      <Box sx={{ width: '100%', height: '100vh' }}>
         <Routes>
           <Route idnex path='/' element={<Index />} />
           <Route path='/index' element={<Index />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
+          <Route path='/mypage/*' element={<MyPage />} />
+          <Route path='*' element={<Index />} />
         </Routes>
-        <Footer />
-      </BrowserRouter>
-    </Grid>
+      </Box>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
