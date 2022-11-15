@@ -13,7 +13,6 @@ import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { INQUIRE_TOKEN } from './redux/Auth/auth';
 import { getUserInfo } from './apis/user/users';
-import Dss from './components/Dss';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,7 +53,6 @@ function App() {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/mypage/*' element={<MyPage />} />
           <Route path='*' element={<Index />} />
-          <Route path='/test' element={<Dss />} />
         </Routes>
       </Box>
       <Footer />
