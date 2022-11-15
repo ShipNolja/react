@@ -15,7 +15,7 @@ import { setRefreshToken } from '../redux/Auth/cookie';
 import { userLogin } from '../apis/user/login';
 import { SET_TOKEN } from '../redux/Auth/auth';
 
-const Login = () => {
+const Dss = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,12 +23,12 @@ const Login = () => {
     event.preventDefault();
     const res = await userLogin(email.value, password.value)();
 
-    if (res.status === 404) {
-      alert('로그인에 실패했습니다!');
+    const { accessToken, accessTokenExpireDate, refreshToken } = res.data;
+
+    if (res.statusText !== 'OK') {
+      alert('에러발생');
       return;
     }
-
-    const { accessToken, accessTokenExpireDate, refreshToken } = res.data;
 
     setRefreshToken(refreshToken);
     dispatch(SET_TOKEN({ accessToken, accessTokenExpireDate }));
@@ -95,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Dss;

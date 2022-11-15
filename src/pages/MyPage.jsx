@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MyInfo from '../components/mypage/MyInfo';
 import MyPageNav from '../components/mypage/MyPageNav';
-import ShipRegister from '../components/ShipRegister';
+import ShipRegister from '../components/mypage/ShipRegister';
 import Reservation from '../components/mypage/Reservation';
 
 const MyPage = () => {
