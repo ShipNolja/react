@@ -28,6 +28,8 @@ const Login = () => {
       return;
     }
 
+    alert('로그인 성공!');
+
     const { accessToken, accessTokenExpireDate, refreshToken } = res.data;
 
     setRefreshToken(refreshToken);

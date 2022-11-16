@@ -14,8 +14,9 @@ import {
 } from '@mui/material/';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { KakaoMapScript } from '../../utils/kakaoMap';
-import MapContainer from '../kakaoMap/MapContainer';
+import MapContainer from '../../kakaoMap/ShipRegisterContainer';
+import { shipRegister } from '../../../apis/ship/shipRegister';
+import { useNavigate } from 'react-router-dom';
 
 /*
   registerNumber : 선박등록번호
@@ -30,17 +31,33 @@ import MapContainer from '../kakaoMap/MapContainer';
 
 */
 const ShipRegister = () => {
+  const navigate = useNavigate();
   const [file, setFiles] = useState('');
+  const [isArea, setIsArea] = useState(false);
   const [kakaoIsOpen, setKakaoIsOpen] = useState(false);
   const [bankName, setBankName] = useState('하나');
   const [address, setAddress] = useState({
     area: '',
     detailArea: '',
     streetAddress: '',
+    port: '',
   });
 
-  const { area, detailArea, streetAddress } = address; // 비구조화 할당을 통해 값 추출
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      area: '',
+      detailArea: '',
+    },
+  });
 
+  const { area, detailArea, streetAddress, port } = address; // 비구조화 할당을 통해 값 추출
+
+  //공통 onChange
   const onChange = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
     setAddress({
@@ -49,27 +66,24 @@ const ShipRegister = () => {
     });
   };
 
+  // 은행명 selectonChange함수
   const bankNameOnChange = (event) => {
     setBankName(event.target.value);
   };
 
+  // 위치찾기 버튼 클릭 시 동작
   const kakaoMapOpenHandler = () => {
     setKakaoIsOpen((prev) => !prev);
   };
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
+  // 파일 올린거 useState에 저장
   const onLoadFile = (e) => {
     const file = e.target.files;
     console.log(file);
     setFiles(file);
   };
 
+  // 파일이 변하면 미리보기도 변경되게
   useEffect(() => {
     preview();
 
@@ -92,11 +106,10 @@ const ShipRegister = () => {
     reader.readAsDataURL(file[0]);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const {
       shipNum: registerNumber,
       shipName: name,
-      bankName,
       bankNum,
       area,
       detailArea,
@@ -115,10 +128,31 @@ const ShipRegister = () => {
       streetAddress,
     };
 
-    console.log(formValue);
-    const blob = new Blob([JSON.stringify(formValue)], {
-      type: 'application/json',
-    });
+    if (!file) {
+      alert('이미지를 등록해주세요!');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', file[0]);
+
+    formData.append(
+      'dto',
+      new Blob([JSON.stringify(formValue)], {
+        type: 'application/json',
+      }),
+    );
+
+    const res = await shipRegister(formData);
+
+    if (res.status !== 200) {
+      alert('선박등록에 실패했습니다!');
+      return;
+    }
+
+    alert('선박 등록에 성공했습니다!');
+    localStorage.removeItem('user');
+    navigate('/');
   };
 
   return (
@@ -164,9 +198,11 @@ const ShipRegister = () => {
                   autoFocus
                   fullWidth
                   type='text'
-                  minLength='13'
-                  maxLength='13'
                   label='선박등록번호(13자리)'
+                  inputProps={{
+                    minLength: 13,
+                    maxLength: 13,
+                  }}
                   {...register('shipNum', {
                     required: true,
                     pattern: /[0-9]{13}/gi,
@@ -185,12 +221,16 @@ const ShipRegister = () => {
                   fullWidth
                   type='text'
                   label='선박 이름'
+                  inputProps={{
+                    maxLength: 20,
+                    minLength: 2,
+                  }}
                   {...register('shipName', {
                     required: true,
                     pattern: /[a-zA-z가-힣0-9]{2,20}/gi,
                   })}
                 />
-                {errors.shipNum && errors.shipNum.type === 'required' && (
+                {errors.shipName && errors.shipName.type === 'required' && (
                   <ErrorSpan>선박이름을 입력해주세요!(특수문자 제외)</ErrorSpan>
                 )}
                 {errors.shipName && errors.shipName.type === 'pattern' && (
@@ -247,40 +287,41 @@ const ShipRegister = () => {
                   <MapContainer
                     setKakaoIsOpen={setKakaoIsOpen}
                     setAddress={setAddress}
+                    setValue={setValue}
+                    setIsArea={setIsArea}
                   />
                 )}
-                {errors.area && errors.area.type === 'required' && (
+                {errors.area && errors.area.type === 'required' && !isArea && (
                   <ErrorSpan>위치 찾기로 지역 정보를 등록해주세요!</ErrorSpan>
                 )}
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  required
-                  fullWidth
                   type='text'
                   label='지역(위치찾기 이용)'
-                  value={area}
                   InputProps={{
                     readOnly: true,
+                    value: area,
                   }}
                   {...register('area', {
                     required: true,
+                    pattern: {
+                      value: /[가-힣]{1,30}/gi,
+                      message: '위치정보가 없습니다!',
+                    },
                   })}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  required
                   fullWidth
                   type='text'
                   label='세부지역(위치찾기 이용)'
-                  value={detailArea}
                   InputProps={{
                     readOnly: true,
+                    value: detailArea,
                   }}
-                  {...register('detailArea', {
-                    required: true,
-                  })}
+                  {...register('detailArea', {})}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -303,8 +344,10 @@ const ShipRegister = () => {
                   fullWidth
                   type='text'
                   name='streetAddress'
-                  value={streetAddress}
                   label='도로명주소'
+                  inputProps={{
+                    value: streetAddress,
+                  }}
                   {...register('streetAddress', {
                     required: true,
                     onChange: onChange,

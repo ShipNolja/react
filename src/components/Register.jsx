@@ -127,16 +127,12 @@ const Register = () => {
                   type='password'
                   id='password'
                   label='비밀번호 (숫자+영문자+특수문자 8자리 이상 16자리 이하)'
+                  inputProps={{
+                    minLength: 8,
+                    maxLength: 16,
+                  }}
                   {...register('password', {
                     required: true,
-                    minLength: {
-                      value: 8,
-                      message: '8~16자리의 비밀번호를 입력해주세요!',
-                    },
-                    maxLength: {
-                      value: 16,
-                      message: '8~16자리의 비밀번호를 입력해주세요!',
-                    },
                     pattern:
                       /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/i,
                   })}
@@ -144,11 +140,6 @@ const Register = () => {
                 {errors.password && errors.password.type === 'required' && (
                   <ErrorSpan>비밀번호를 입력해주세요!</ErrorSpan>
                 )}
-                {errors.password &&
-                  errors.password.type === 'minLength' &&
-                  errors.password.type === 'maxLength' && (
-                    <ErrorSpan>8~16자리의 비밀번호를 입력해주세요!</ErrorSpan>
-                  )}
                 {errors.password && errors.password.type === 'pattern' && (
                   <ErrorSpan>
                     8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 사용해주세요!
@@ -181,10 +172,12 @@ const Register = () => {
                   fullWidth
                   id='name'
                   label='이름'
-                  {...register('name', {
-                    required: true,
+                  inputProps={{
                     minLength: 1,
                     maxLength: 10,
+                  }}
+                  {...register('name', {
+                    required: true,
                     pattern: /^[가-힣]+$/,
                   })}
                 />
@@ -203,19 +196,13 @@ const Register = () => {
                   required
                   fullWidth
                   id='phone'
-                  minLength='10'
-                  maxLength='11'
                   label='핸드폰번호'
+                  inputProps={{
+                    minLength: '10',
+                    maxLength: '11',
+                  }}
                   {...register('phone', {
                     required: true,
-                    minLength: {
-                      value: 10,
-                      message: '올바른 핸드폰 번호를 입력해주세요!',
-                    },
-                    maxLength: {
-                      value: 11,
-                      message: '올바른 핸드폰 번호를 입력해주세요!',
-                    },
                     pattern: /^[0-9]{10,11}$/,
                     onChange: (e) => setPhone(e.target.value),
                     onBlur: checkPhoneOnBlur,

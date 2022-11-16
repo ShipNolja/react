@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const { kakao } = window;
 
-const MapContainer = ({ setKakaoIsOpen, setAddress }) => {
+const MapContainer = ({ setKakaoIsOpen, setAddress, setValue, setIsArea }) => {
   // 검색결과 배열에 담아줌
   const [place, setPlace] = useState([]);
   const [inputText, setInputText] = useState('');
@@ -22,6 +22,9 @@ const MapContainer = ({ setKakaoIsOpen, setAddress }) => {
     const [area, detailArea, ...rest] = address.split(' ');
     const streetAddress = rest.join(' ');
     setAddress({ area, detailArea, streetAddress });
+    setValue('area', area);
+    setValue('detailArea', detailArea);
+    setIsArea((prev) => !prev);
     setKakaoIsOpen(false);
   };
 
@@ -131,12 +134,28 @@ const MapContainer = ({ setKakaoIsOpen, setAddress }) => {
           <div key={i} style={{ marginTop: '20px', display: 'flex' }}>
             <span style={{ marginRight: '10px' }}>{i + 1}</span>
             <div>
-              <h5 onClick={getAdress} data-address={item.address_name}>
+              <h5
+                onClick={getAdress}
+                data-address={
+                  item.road_address_name
+                    ? item.road_address_name
+                    : item.address_name
+                }
+              >
                 {item.place_name}
               </h5>
               <div>
-                <span onClick={getAdress} data-address={item.address_name}>
+                <span
+                  onClick={getAdress}
+                  data-address={
+                    item.road_address_name
+                      ? item.road_address_name
+                      : item.address_name
+                  }
+                >
                   {item.address_name}
+                  <br />
+                  {item.road_address_name}
                 </span>
               </div>
             </div>

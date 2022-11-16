@@ -38,6 +38,7 @@ function App() {
     if (isToken) {
       setIsLoginAuth(true);
       dispatch(INQUIRE_TOKEN({ isToken, expireTime }));
+      refreshUserInfoHandler();
     }
   }, []);
 

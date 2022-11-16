@@ -4,10 +4,7 @@ import { getCookieToken, setRefreshToken } from '../redux/Auth/cookie';
 const instance = axios.create({
   baseURL: '/api/',
   headers: {
-    'Content-Type': `application/json;charset=UTF-8`,
-    Accept: 'application/json',
-
-    // 추가
+    // 추
     'Access-Control-Allow-Origin': `http://localhost:3000`,
     'Access-Control-Allow-Credentials': 'true',
   },
