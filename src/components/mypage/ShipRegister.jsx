@@ -14,6 +14,9 @@ import {
 } from '@mui/material/';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { KakaoMapScript } from '../../utils/kakaoMap';
+import MapContainer from '../kakaoMap/MapContainer';
+
 /*
   registerNumber : 선박등록번호
   image: 배 대표 이미지
@@ -28,10 +31,30 @@ import { useForm } from 'react-hook-form';
 */
 const ShipRegister = () => {
   const [file, setFiles] = useState('');
+  const [kakaoIsOpen, setKakaoIsOpen] = useState(false);
   const [bankName, setBankName] = useState('하나');
+  const [address, setAddress] = useState({
+    area: '',
+    detailArea: '',
+    streetAddress: '',
+  });
+
+  const { area, detailArea, streetAddress } = address; // 비구조화 할당을 통해 값 추출
+
+  const onChange = (e) => {
+    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+    setAddress({
+      ...address, // 기존의 input 객체를 복사한 뒤
+      [name]: value, // name 키를 가진 값을 value 로 설정
+    });
+  };
 
   const bankNameOnChange = (event) => {
     setBankName(event.target.value);
+  };
+
+  const kakaoMapOpenHandler = () => {
+    setKakaoIsOpen((prev) => !prev);
   };
 
   const {
@@ -213,9 +236,19 @@ const ShipRegister = () => {
                 )}
               </Grid>
               <Grid item xs={12}>
-                <Button fullWidth variant='contained'>
+                <Button
+                  fullWidth
+                  variant='contained'
+                  onClick={kakaoMapOpenHandler}
+                >
                   위치찾기
                 </Button>
+                {kakaoIsOpen && (
+                  <MapContainer
+                    setKakaoIsOpen={setKakaoIsOpen}
+                    setAddress={setAddress}
+                  />
+                )}
                 {errors.area && errors.area.type === 'required' && (
                   <ErrorSpan>위치 찾기로 지역 정보를 등록해주세요!</ErrorSpan>
                 )}
@@ -226,6 +259,7 @@ const ShipRegister = () => {
                   fullWidth
                   type='text'
                   label='지역(위치찾기 이용)'
+                  value={area}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -240,6 +274,7 @@ const ShipRegister = () => {
                   fullWidth
                   type='text'
                   label='세부지역(위치찾기 이용)'
+                  value={detailArea}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -267,9 +302,12 @@ const ShipRegister = () => {
                   required
                   fullWidth
                   type='text'
+                  name='streetAddress'
+                  value={streetAddress}
                   label='도로명주소'
                   {...register('streetAddress', {
                     required: true,
+                    onChange: onChange,
                   })}
                 />
                 {errors.streetAddress &&

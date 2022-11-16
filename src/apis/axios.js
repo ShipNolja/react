@@ -18,7 +18,6 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    console.log('config입니다', config);
     const accessToken = localStorage.getItem('accessToken'); // access 토큰을 가져오는 함수
     if (accessToken) {
       config.headers['X-AUTH-TOKEN'] = accessToken;
@@ -41,6 +40,7 @@ instance.interceptors.response.use(
   async function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
+    console.log(error);
     const {
       config,
       response: { status },
