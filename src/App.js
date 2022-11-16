@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 
@@ -12,7 +12,9 @@ import MyPage from './pages/MyPage';
 import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { INQUIRE_TOKEN } from './redux/Auth/auth';
-import { getUserInfo } from './apis/user/users';
+import { userInfo } from './apis/users';
+import { setLocalStoarge } from './utils/setLocalStoarge';
+import { shipInfo } from './apis/ship';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,11 +27,18 @@ function App() {
   useEffect(() => {
     setIsLoginAuth(isAuth);
 
+    const fetchUserData = async () => {
+      const data = await userInfo();
+      setLocalStoarge('user', data);
+      const shipdata = await shipInfo();
+      setLocalStoarge('ship', shipdata);
+    };
+
     if (isToken) {
       setIsLoginAuth(true);
       dispatch(INQUIRE_TOKEN({ isToken, expireTime }));
-      getUserInfo();
     }
+    fetchUserData();
   }, [isAuth]);
 
   return (

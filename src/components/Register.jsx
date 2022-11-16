@@ -13,11 +13,7 @@ import {
 } from '@mui/material/';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import {
-  userRegister,
-  validateUserId,
-  validatePhone,
-} from '../apis/user/register';
+import { userRegister, validateUserId, validatePhone } from '../apis/users';
 
 const Register = () => {
   const navigate = useNavigate();

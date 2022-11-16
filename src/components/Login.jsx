@@ -12,7 +12,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setRefreshToken } from '../redux/Auth/cookie';
-import { userLogin } from '../apis/user/login';
+import { userLogin } from '../apis/users';
 import { SET_TOKEN } from '../redux/Auth/auth';
 
 const Login = () => {

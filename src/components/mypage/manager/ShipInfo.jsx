@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Avatar,
-  Button,
   CssBaseline,
   TextField,
   FormControl,
   Grid,
   Box,
-  Select,
-  MenuItem,
   Container,
-  InputLabel,
 } from '@mui/material/';
-import { getShipInfo } from '../../../apis/ship/shipInfo';
+import { shipInfo } from '../../../apis/ship';
 
 const ShipInfo = () => {
+  const [shipData, setShipData] = useState({});
   const {
     area,
     bankName,
@@ -26,7 +23,15 @@ const ShipInfo = () => {
     registerNumber,
     shipId,
     streetAddress,
-  } = JSON.parse(localStorage.getItem('ship'));
+  } = shipData;
+
+  useEffect(() => {
+    const getInfo = async () => {
+      const data = await shipInfo();
+      setShipData(data);
+    };
+    getInfo();
+  }, []);
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -63,6 +68,9 @@ const ShipInfo = () => {
                   type='text'
                   label='선박등록번호(13자리)'
                   value={registerNumber}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -74,6 +82,9 @@ const ShipInfo = () => {
                   type='text'
                   label='선박 이름'
                   value={name}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -84,6 +95,9 @@ const ShipInfo = () => {
                   fullWidth
                   label='은행명'
                   value={bankName}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -94,6 +108,9 @@ const ShipInfo = () => {
                   fullWidth
                   label='계좌번호 (-제외)'
                   value={bankNum}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -104,6 +121,9 @@ const ShipInfo = () => {
                   type='text'
                   label='지역'
                   value={area}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -115,6 +135,12 @@ const ShipInfo = () => {
                   type='text'
                   label='세부지역'
                   value={detailArea}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -123,6 +149,9 @@ const ShipInfo = () => {
                   type='text'
                   label='항구명'
                   value={port}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -135,6 +164,12 @@ const ShipInfo = () => {
                   name='streetAddress'
                   label='도로명주소'
                   value={streetAddress}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
               </Grid>
             </Grid>
