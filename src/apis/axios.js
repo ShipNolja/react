@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { getCookieToken, setRefreshToken } from '../redux/Auth/cookie';
 
+axios.defaults.withCredentials = true;
+
 const instance = axios.create({
   baseURL: '/api/',
   headers: {
     // 추
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': `http://localhost:3000`,
     'Access-Control-Allow-Credentials': 'true',
   },
@@ -37,7 +40,6 @@ instance.interceptors.response.use(
   async function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    console.log(error);
     const {
       config,
       response: { status },
@@ -47,11 +49,12 @@ instance.interceptors.response.use(
 
     // 인증 에러 발생시
     if (status === 401) {
+      const accessToken = localStorage.getItem('accessToken'); // access 토큰을 가져오는 함수
       const refreshToken = getCookieToken('refreshToken');
       axios({
         method: 'POST',
         url: `/reissue`,
-        data: { refreshToken },
+        data: JSON.stringify({ accessToken, refreshToken }),
       }).then((response) => {
         const { accessToken, accessTokenExpireDate, grantType, refreshToken } =
           response.data;

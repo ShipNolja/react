@@ -26,34 +26,39 @@ const MyPageNav = ({ isUser }) => {
             margin: '30px 0px',
           }}
         >
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant='scrollable'
-            scrollButtons='auto'
-            aria-label='scrollable auto tabs'
-          >
-            <Tab label='내정보' onClick={() => navigate('profile')} />
-            {isUser && (
-              <>
-                <Tab label='예약정보' onClick={() => navigate('reservation')} />
-                <Tab
-                  label='사업자등록'
-                  onClick={() => navigate('shopRegister')}
-                />
-              </>
-            )}
-            {!isUser && (
-              <>
-                <Tab label='선박정보' onClick={() => navigate('shipInfo')} />
-                <Tab label='출조등록' onClick={() => navigate('addfishing')} />
-                <Tab
-                  label='예약정보'
-                  onClick={() => navigate('shipreservation')}
-                />
-              </>
-            )}
-          </Tabs>
+          {isUser && (
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant='scrollable'
+              scrollButtons='auto'
+              aria-label='scrollable auto tabs'
+            >
+              <Tab label='내정보' onClick={() => navigate('profile')} />
+              <Tab label='예약정보' onClick={() => navigate('reservation')} />
+              <Tab
+                label='사업자등록'
+                onClick={() => navigate('shipRegister')}
+              />
+            </Tabs>
+          )}
+          {!isUser && (
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant='scrollable'
+              scrollButtons='auto'
+              aria-label='scrollable auto tabs'
+            >
+              <Tab label='내정보' onClick={() => navigate('profile')} />
+              <Tab label='선박정보' onClick={() => navigate('shipInfo')} />
+              <Tab label='출조등록' onClick={() => navigate('addfishing')} />
+              <Tab
+                label='예약정보'
+                onClick={() => navigate('shipreservation')}
+              />
+            </Tabs>
+          )}
         </Box>
       </Grid>
     </nav>

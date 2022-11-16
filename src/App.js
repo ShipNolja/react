@@ -22,25 +22,15 @@ function App() {
   const [isLoginAuth, setIsLoginAuth] = useState(false);
   const isAuth = useSelector((state) => state.token.authenticated);
 
-  // ! 유저 정보 localStroage 담아주기
-  const refreshUserInfoHandler = async () => {
-    const data = await getUserInfo()();
-    const { userid, name, phone, role } = data.data;
-    localStorage.setItem('user', JSON.stringify({ userid, name, phone, role }));
-  };
-
   useEffect(() => {
     setIsLoginAuth(isAuth);
-    refreshUserInfoHandler();
-  }, [isAuth]);
 
-  useEffect(() => {
     if (isToken) {
       setIsLoginAuth(true);
       dispatch(INQUIRE_TOKEN({ isToken, expireTime }));
-      refreshUserInfoHandler();
+      getUserInfo();
     }
-  }, []);
+  }, [isAuth]);
 
   return (
     <BrowserRouter>
