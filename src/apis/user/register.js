@@ -1,4 +1,5 @@
 import axios from 'axios';
+import instance from '../axios';
 
 // {
 // 	  `data`는 서버가 제공한 응답(데이터) 입니다.

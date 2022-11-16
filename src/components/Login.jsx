@@ -1,32 +1,36 @@
-import React from 'react';
-import { useRef } from 'react';
-import styled from 'styled-components';
-import Colors from '../styles/Color';
-import { CustomButton } from '../UI/StyleButton';
-import { userLogin } from '../apis/user/login';
-import { setUserInfo } from '../utils/getUserInfo';
-import { setRefreshToken } from '../redux/Auth/cookie';
-import { useDispatch } from 'react-redux';
-import { SET_TOKEN } from '../redux/Auth/auth';
+import React, { useRef } from 'react';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
-import { SET_USER } from '../redux/user/user';
+import { useDispatch } from 'react-redux';
+import { setRefreshToken } from '../redux/Auth/cookie';
+import { userLogin } from '../apis/user/login';
+import { SET_TOKEN } from '../redux/Auth/auth';
 
-export const Login = () => {
+const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const idRef = useRef();
-  const pwRef = useRef();
 
   const loginHandleSubmit = async (event) => {
     event.preventDefault();
-    const res = await userLogin(idRef.current.value, pwRef.current.value)();
+    const res = await userLogin(email.value, password.value)();
 
-    const { accessToken, accessTokenExpireDate, refreshToken } = res.data;
-
-    if (res.statusText !== 'OK') {
-      alert('에러발생');
+    if (res.status === 404) {
+      alert('로그인에 실패했습니다!');
       return;
     }
+
+    alert('로그인 성공!');
+
+    const { accessToken, accessTokenExpireDate, refreshToken } = res.data;
 
     setRefreshToken(refreshToken);
     dispatch(SET_TOKEN({ accessToken, accessTokenExpireDate }));
@@ -41,73 +45,56 @@ export const Login = () => {
   };
 
   return (
-    <LoginContainer>
-      <LoginBox>
-        <TitleText>로그인</TitleText>
-
-        <LoginForm onSubmit={loginHandleSubmit}>
-          <InputLabel id='email'>아이디</InputLabel>
-          <LoginInput id='email' type='email' ref={idRef} />
-          <InputLabel id='password'>비밀번호</InputLabel>
-          <LoginInput id='password' type='password' ref={pwRef} />
-          <CustomButton
+    <Container component='main' maxWidth='xs'>
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
+        <Typography component='h1' variant='h5'>
+          로그인
+        </Typography>
+        <Box
+          component='form'
+          onSubmit={loginHandleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            id='email'
+            label='이메일'
+            autoComplete='email'
+            autoFocus
+          />
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            label='비밀번호'
+            type='password'
+            id='password'
+            autoComplete='current-password'
+          />
+          <Button
             type='submit'
-            color={Colors.colorWhite}
-            background={Colors.primaryColor}
-            hoverbackground={Colors.darkPrimaryColor}
-            style={{ width: '100%', height: 50 }}
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}
           >
             로그인
-          </CustomButton>
-        </LoginForm>
-      </LoginBox>
-    </LoginContainer>
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
 export default Login;
-
-const LoginContainer = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90%;
-  width: 100%;
-`;
-
-const LoginBox = styled.article`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: aliceblue;
-  max-width: 800px;
-  width: 100%;
-  padding: 40px 0;
-  border-radius: 20px;
-`;
-
-const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  width: 100%;
-`;
-
-const LoginInput = styled.input`
-  border: 1px solid ${Colors.colorWhiteGrey};
-  border-radius: 5px;
-  height: 40px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  font-size: 16px;
-`;
-
-const InputLabel = styled.label`
-  margin-bottom: 5px;
-`;
-
-const TitleText = styled.h1`
-  font-size: 25px;
-  margin-bottom: 40px;
-`;

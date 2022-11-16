@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { getCookieToken, setRefreshToken } from '../redux/Auth/cookie';
 
+axios.defaults.withCredentials = true;
+
 const instance = axios.create({
   baseURL: '/api/',
   headers: {
-    'Content-Type': `application/json;charset=UTF-8`,
-    Accept: 'application/json',
-
-    // 추가
+    // 추
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': `http://localhost:3000`,
     'Access-Control-Allow-Credentials': 'true',
   },
@@ -18,7 +18,6 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    console.log('config입니다', config);
     const accessToken = localStorage.getItem('accessToken'); // access 토큰을 가져오는 함수
     if (accessToken) {
       config.headers['X-AUTH-TOKEN'] = accessToken;
@@ -50,11 +49,12 @@ instance.interceptors.response.use(
 
     // 인증 에러 발생시
     if (status === 401) {
+      const accessToken = localStorage.getItem('accessToken'); // access 토큰을 가져오는 함수
       const refreshToken = getCookieToken('refreshToken');
       axios({
         method: 'POST',
         url: `/reissue`,
-        data: { refreshToken },
+        data: JSON.stringify({ accessToken, refreshToken }),
       }).then((response) => {
         const { accessToken, accessTokenExpireDate, grantType, refreshToken } =
           response.data;
