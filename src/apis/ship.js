@@ -46,3 +46,15 @@ export const shipInfo = async () => {
 // "infoStartTime": "xx(시):xx(분):xx(초)",
 // "infoTarget": "광어, 우럭, 갑오징어 등",
 // "shipId": "선박 기본키 값"
+
+export const addFishingInfo = (data) => {
+  return async () => {
+    try {
+      const res = await instance.post('/manager/fishingInfo', data);
+
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

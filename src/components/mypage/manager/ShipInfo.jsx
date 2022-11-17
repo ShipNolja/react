@@ -55,7 +55,7 @@ const ShipInfo = () => {
           }}
           className='img__box'
           style={{
-            backgroundImage: `http://localhost:8081/url(${image})`,
+            backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/my.shipnolja.sss.bucket/fe4f56fe-d5c4-436e-8cb6-871b86a8c3e4.jpg)`,
             backgroundSize: 'cover',
           }}
         ></Avatar>
