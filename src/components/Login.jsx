@@ -12,7 +12,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setRefreshToken } from '../redux/Auth/cookie';
-import { userLogin } from '../apis/user/login';
+import { userLogin } from '../apis/users';
 import { SET_TOKEN } from '../redux/Auth/auth';
 
 const Login = () => {
@@ -21,7 +21,7 @@ const Login = () => {
 
   const loginHandleSubmit = async (event) => {
     event.preventDefault();
-    const res = await userLogin(email.value, password.value)();
+    const res = await userLogin(email.value, password.value);
 
     if (res.status === 404) {
       alert('로그인에 실패했습니다!');

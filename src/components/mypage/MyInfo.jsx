@@ -1,12 +1,20 @@
 import { Box, Grid } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MyPageNav from './MyPageNav';
+import { userInfo } from '../../apis/users';
 
 const MyPage = () => {
-  const { userid, name, phone, role } = JSON.parse(
-    localStorage.getItem('user'),
-  );
+  const [userData, setUserData] = useState({});
+  const { userid, name, phone, role } = userData;
+
+  useEffect(() => {
+    const getInfo = async () => {
+      const data = await userInfo();
+      setUserData(data);
+    };
+    getInfo();
+  }, []);
 
   return (
     <Grid container spacing={1}>
@@ -33,9 +41,12 @@ const MyPage = () => {
             style={{ width: '50%' }}
             id='outlined-read-only-input'
             label='이메일'
-            defaultValue={userid}
+            InputLabelProps={{
+              shrink: true,
+            }}
             InputProps={{
               readOnly: true,
+              value: userid,
             }}
             margin='dense'
           />
@@ -43,9 +54,12 @@ const MyPage = () => {
             style={{ width: '50%' }}
             id='outlined-read-only-input'
             label='이름'
-            defaultValue={name}
+            InputLabelProps={{
+              shrink: true,
+            }}
             InputProps={{
               readOnly: true,
+              value: name,
             }}
             margin='dense'
           />
@@ -53,9 +67,12 @@ const MyPage = () => {
             style={{ width: '50%' }}
             id='outlined-read-only-input'
             label='전화번호'
-            defaultValue={phone}
+            InputLabelProps={{
+              shrink: true,
+            }}
             InputProps={{
               readOnly: true,
+              value: phone,
             }}
             margin='dense'
           />
@@ -63,9 +80,12 @@ const MyPage = () => {
             style={{ width: '50%' }}
             id='outlined-read-only-input'
             label='권한'
-            defaultValue={role}
+            InputLabelProps={{
+              shrink: true,
+            }}
             InputProps={{
               readOnly: true,
+              value: role,
             }}
             margin='dense'
           />

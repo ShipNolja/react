@@ -13,11 +13,7 @@ import {
 } from '@mui/material/';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import {
-  userRegister,
-  validateUserId,
-  validatePhone,
-} from '../apis/user/register';
+import { userRegister, validateUserId, validatePhone } from '../apis/users';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -60,7 +56,7 @@ const Register = () => {
   };
 
   const onSubmit = async ({ email, password, name, phone }) => {
-    const res = await userRegister(email, password, name, phone)();
+    const res = await userRegister(email, password, name, phone);
 
     if (res.data.id === -1) {
       alert('회원가입 실패');

@@ -15,10 +15,8 @@ import {
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import MapContainer from '../../kakaoMap/ShipRegisterContainer';
-import { shipRegister } from '../../../apis/ship/shipRegister';
 import { useNavigate } from 'react-router-dom';
-import { getUserInfo } from '../../../apis/user/users';
-import { getShipInfo } from '../../../apis/ship/shipInfo';
+import { shipRegister } from '../../../apis/ship';
 
 /*
   registerNumber : 선박등록번호
@@ -151,11 +149,6 @@ const ShipRegister = () => {
     }
 
     alert('선박 등록에 성공했습니다!');
-
-    //기존 user정보 지우고 manager로 변경
-    getUserInfo();
-    //선박정보 localStorage담기
-    getShipInfo();
 
     navigate('/index');
   };
