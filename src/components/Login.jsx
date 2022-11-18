@@ -21,7 +21,7 @@ const Login = () => {
 
   const loginHandleSubmit = async (event) => {
     event.preventDefault();
-    const res = await userLogin(email.value, password.value)();
+    const res = await userLogin(email.value, password.value);
 
     if (res.status === 404) {
       alert('로그인에 실패했습니다!');

@@ -22,6 +22,7 @@ import { addFishingInfo } from '../../../apis/ship';
 import { setDate, setTime } from '../../../utils/date';
 
 const AddFishing = () => {
+  const navigate = useNavigate();
   // 시작 날짜
   const [startDate, setStartDate] = useState(new Date());
   // 시작 시간
@@ -30,6 +31,7 @@ const AddFishing = () => {
   const [endTime, setEndTime] = useState(null);
   // 시작 시간을 선택했는지
   const [isSelected, setIsSelected] = useState(false);
+  // 수용인원
   const [capacity, setCapacity] = useState(1);
 
   // 시작 시간이 선택되면 해당 시간 적용 및 isSelected를 true, endTime을 null로
@@ -83,8 +85,9 @@ const AddFishing = () => {
 
     console.log(fishingData);
 
-    const res = await addFishingInfo(fishingData)();
+    const res = await addFishingInfo(fishingData);
     console.log(res);
+    navigate('/');
   };
 
   // 현재 시간 기준 지나간 시간 선택 불가

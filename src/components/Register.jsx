@@ -56,7 +56,7 @@ const Register = () => {
   };
 
   const onSubmit = async ({ email, password, name, phone }) => {
-    const res = await userRegister(email, password, name, phone)();
+    const res = await userRegister(email, password, name, phone);
 
     if (res.data.id === -1) {
       alert('회원가입 실패');

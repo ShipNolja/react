@@ -2,17 +2,15 @@ import axios from 'axios';
 import instance from './instance';
 
 // 유저 회원가입
-export const userRegister = (userid, password, name, phone) => {
-  return async () => {
-    const res = await axios.post('/api/sign-up', {
-      name,
-      password,
-      phone,
-      userid,
-    });
+export const userRegister = async (userid, password, name, phone) => {
+  const res = await axios.post('/api/sign-up', {
+    name,
+    password,
+    phone,
+    userid,
+  });
 
-    return res;
-  };
+  return res;
 };
 
 // 아이디 중복 확인
@@ -31,17 +29,15 @@ export const validatePhone = async (phone) => {
 // grantType: "Bearer"
 // refreshToken: ~~~
 
-export const userLogin = (userId, password) => {
-  return async () => {
-    const res = await axios
-      .post('/api/login', {
-        userId,
-        password,
-      })
-      .catch((error) => error.response);
+export const userLogin = async (userId, password) => {
+  const res = await axios
+    .post('/api/login', {
+      userId,
+      password,
+    })
+    .catch((error) => error.response);
 
-    return res;
-  };
+  return res;
 };
 
 // 유저 정보 가져오기
