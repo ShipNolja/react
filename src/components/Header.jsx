@@ -28,26 +28,40 @@ const Header = ({ isAuth }) => {
             <div>로고자리</div>
           </div>
           {!isAuth && (
-            <ButtonWrap>
-              <CustomButton
-                type='button'
-                onClick={() => navigate('/login')}
-                background={Colors.colorWhite}
-                hoverbackground={Colors.colorDarkGrey}
-                color={Colors.colorBlack}
-              >
-                로그인
-              </CustomButton>
-              <CustomButton
-                type='button'
-                onClick={() => navigate('/register')}
-                background={Colors.primaryColor}
-                hoverbackground={Colors.primaryDeepColor}
-                color={Colors.colorWhite}
-              >
-                회원가입
-              </CustomButton>
-            </ButtonWrap>
+            <>
+              <ButtonWrap>
+                <Link
+                  to='/fishing'
+                  className='nav'
+                  style={{ margin: '0px 10px' }}
+                >
+                  실시간예약
+                </Link>
+                <Link to='/shiplist' className='nav'>
+                  선상검색
+                </Link>
+              </ButtonWrap>
+              <ButtonWrap>
+                <CustomButton
+                  type='button'
+                  onClick={() => navigate('/login')}
+                  background={Colors.colorWhite}
+                  hoverbackground={Colors.colorDarkGrey}
+                  color={Colors.colorBlack}
+                >
+                  로그인
+                </CustomButton>
+                <CustomButton
+                  type='button'
+                  onClick={() => navigate('/register')}
+                  background={Colors.primaryColor}
+                  hoverbackground={Colors.primaryDeepColor}
+                  color={Colors.colorWhite}
+                >
+                  회원가입
+                </CustomButton>
+              </ButtonWrap>
+            </>
           )}
           {isAuth && (
             <>

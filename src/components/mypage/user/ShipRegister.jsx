@@ -154,7 +154,7 @@ const ShipRegister = () => {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <>
       <CssBaseline />
       <Box
         sx={{
@@ -295,6 +295,7 @@ const ShipRegister = () => {
               </Grid>
               <Grid item xs={6}>
                 <TextField
+                  fullWidth
                   type='text'
                   label='지역(위치찾기 이용)'
                   InputProps={{
@@ -369,7 +370,7 @@ const ShipRegister = () => {
           </FormControl>
         </Box>
       </Box>
-    </Container>
+    </>
   );
 };
 

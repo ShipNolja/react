@@ -8,47 +8,34 @@ import { Box, Button } from '@mui/material';
 
 const Search = () => {
   return (
-    <Grid xs={12} item={true} height='100%'>
-      <SearchBackgroundWrap>
-        <Box
+    <Grid xs={12} item={true}>
+      <Box
+        component='nav'
+        sx={{
+          marginTop: 2,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <TextField
+          fullWidth
+          id='outlined-search'
+          placeholder='검색어를 입력하세요.'
+          type='text'
           sx={{
-            width: '50%',
-            borderRadius: '15px',
-            paddingRight: '10px',
+            marginRight: 1,
           }}
-        >
-          <TextField
-            sx={{
-              input: { background: '#fff', borderRadius: '15px' },
-            }}
-            fullWidth
-            id='outlined-search'
-            placeholder='검색어를 입력하세요.'
-            type='search'
-          />
-        </Box>
+        />
         <Button
-          sx={{ height: '55px', color: '#fff', borderRadius: '15px' }}
+          size='large'
+          sx={{ color: '#fff', height: '55px', width: '20%' }}
           variant='contained'
         >
           검색
         </Button>
-      </SearchBackgroundWrap>
+      </Box>
     </Grid>
   );
 };
 
 export default Search;
-
-const CustomInput = styled.input`
-  border-radius: ${(props) => props.radius || '0'};
-  padding: 0px 20px;
-`;
-
-const SearchBackgroundWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  background-color: ${Colors.primaryDeepColor};
-`;
