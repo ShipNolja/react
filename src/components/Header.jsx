@@ -31,7 +31,7 @@ const Header = ({ isAuth }) => {
             <>
               <ButtonWrap>
                 <Link
-                  to='/fishing'
+                  to='/index'
                   className='nav'
                   style={{ margin: '0px 10px' }}
                 >
@@ -67,7 +67,7 @@ const Header = ({ isAuth }) => {
             <>
               <ButtonWrap>
                 <Link
-                  to='/fishing'
+                  to='/index'
                   className='nav'
                   style={{ margin: '0px 10px' }}
                 >

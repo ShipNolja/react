@@ -15,6 +15,7 @@ import { INQUIRE_TOKEN } from './redux/Auth/auth';
 import { userInfo } from './apis/users';
 import { setLocalStoarge } from './utils/setLocalStoarge';
 import { shipInfo } from './apis/ship';
+import ShipList from './components/shipList/ShipList';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
           <Routes>
             <Route idnex path='/' element={<Index />} />
             <Route path='/index' element={<Index />} />
+            <Route path='/shiplist' element={<ShipList />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/mypage/*' element={<MyPage />} />

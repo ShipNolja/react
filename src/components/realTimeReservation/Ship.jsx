@@ -25,8 +25,8 @@ const Ship = ({ item }) => {
     infoCapacity,
   } = item;
 
-  const infoStartTime = `${startTime.hour}:${startTime.minute}`;
-  const infoendTime = `${endTime.hour}:${endTime.minute}`;
+  const infoStartTime = startTime.slice(-8, 5); // 23:00:00
+  const infoendTime = endTime.slice(-8, 5);
 
   return (
     <Box
