@@ -11,8 +11,10 @@ import {
   Container,
 } from '@mui/material/';
 import styled from 'styled-components';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Ship = ({ item }) => {
+  const navigate = useNavigate();
   const {
     id,
     area,
@@ -71,8 +73,19 @@ const Ship = ({ item }) => {
           <SubContent>{infoCapacity}</SubContent>
         </div>
         <div style={{ width: '100%', textAlign: 'right' }}>
-          <Button variant='contained' style={{ padding: '8px' }}>
-            예약하기
+          <Button
+            variant='contained'
+            style={{ padding: '8px', marginRight: '10px' }}
+            onClick={() => navigate(`/reservation/${id}`)}
+          >
+            바로예약
+          </Button>
+          <Button
+            variant='contained'
+            style={{ padding: '8px' }}
+            onClick={() => navigate(`/detailShipList/${id}`)}
+          >
+            상세정보
           </Button>
         </div>
       </Box>

@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Footer from './components/Layout/Footer';
+import Header from './components/Layout/Header';
 import Index from './pages/Index';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -16,6 +16,8 @@ import { userInfo } from './apis/users';
 import { setLocalStoarge } from './utils/setLocalStoarge';
 import { shipInfo } from './apis/ship';
 import ShipList from './components/shipList/ShipList';
+import Reservation from './components/Reservation';
+import DetailFishinglist from './components/realTimeReservation/DetailFishingList';
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +53,13 @@ function App() {
           <Routes>
             <Route idnex path='/' element={<Index />} />
             <Route path='/index' element={<Index />} />
-            <Route path='/shiplist' element={<ShipList />} />
+            <Route path='/fishinglist' element={<Index />} />
+            <Route path='/reservation/:shipId' element={<Reservation />} />
+            <Route
+              path='/detailFishinglist/:shipId'
+              element={<DetailFishinglist />}
+            />
+            <Route path='/shipList' element={<ShipList />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/mypage/*' element={<MyPage />} />

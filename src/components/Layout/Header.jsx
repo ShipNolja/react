@@ -1,13 +1,13 @@
 import React from 'react';
-import '../css/Nav.css';
+import '../../css/Nav.css';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Colors from '../styles/Color';
-import { CustomButton } from '../UI/StyleButton';
+import Colors from '../../styles/Color';
+import { CustomButton } from '../../UI/StyleButton';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { DELETE_TOKEN } from '../redux/Auth/auth';
+import { DELETE_TOKEN } from '../../redux/Auth/auth';
 import Container from '@mui/material/Container';
 
 const Header = ({ isAuth }) => {
@@ -31,7 +31,7 @@ const Header = ({ isAuth }) => {
             <>
               <ButtonWrap>
                 <Link
-                  to='/index'
+                  to='/fishinglist'
                   className='nav'
                   style={{ margin: '0px 10px' }}
                 >
@@ -67,7 +67,7 @@ const Header = ({ isAuth }) => {
             <>
               <ButtonWrap>
                 <Link
-                  to='/index'
+                  to='/fishinglist'
                   className='nav'
                   style={{ margin: '0px 10px' }}
                 >
