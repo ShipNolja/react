@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Button,
@@ -13,8 +13,7 @@ import {
 import styled from 'styled-components';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const Ship = ({ item }) => {
-  const navigate = useNavigate();
+const DetailShip = ({ item }) => {
   const {
     id,
     area,
@@ -27,6 +26,7 @@ const Ship = ({ item }) => {
     infoCapacity,
   } = item;
 
+  //startTime.slice(-8, 5);
   const infoStartTime = startTime.slice(-8, 5); // 23:00:00
   const infoendTime = endTime.slice(-8, 5);
 
@@ -35,28 +35,42 @@ const Ship = ({ item }) => {
       sx={{
         border: 'solid 1px #7f7f7f;',
         display: 'flex',
-        height: 150,
+        height: 200,
         padding: '15px',
       }}
     >
       <Box
         component='div'
-        sx={{ width: '40%', height: '100%', marginRight: '15px' }}
+        sx={{
+          width: '30%',
+          height: '100%',
+          marginRight: '15px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
-        <img src='이미지' width='100%' height='100%' />
+        <div>
+          <ShipName>{shipName}</ShipName>
+          <ShipArea>{`( ${area}, ${port} )`}</ShipArea>
+        </div>
       </Box>
       <Box
         component='div'
         sx={{
-          width: '60%',
+          width: '70%',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
         }}
       >
         <div>
-          <ShipName>{shipName}</ShipName>
-          <ShipArea>{`( ${area}, ${port} )`}</ShipArea>
+          <span>공지사항</span>
+          <SubContent></SubContent>
+        </div>
+        <div>
+          <span>준비물</span>
+          <SubContent></SubContent>
         </div>
         <div>
           <SubTitle>출항일시</SubTitle>
@@ -84,14 +98,7 @@ const Ship = ({ item }) => {
               )
             }
           >
-            바로예약
-          </Button>
-          <Button
-            variant='contained'
-            style={{ padding: '8px' }}
-            onClick={() => navigate(`/detailFishinglist/${ship_id}`)}
-          >
-            상세정보
+            예약하기
           </Button>
         </div>
       </Box>
@@ -99,7 +106,7 @@ const Ship = ({ item }) => {
   );
 };
 
-export default Ship;
+export default DetailShip;
 
 const ShipName = styled.span`
   font-size: 20px;
@@ -123,4 +130,5 @@ const SubTitle = styled.span`
 const SubContent = styled.span`
   font-size: 13px;
   font-weight: 400;
+  white-space: pre-wrap;
 `;

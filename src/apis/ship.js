@@ -72,3 +72,16 @@ export const fishingList = async (
     console.log(error);
   }
 };
+
+// ----------------------해당 선박 출조 상세 리스트-------------------
+export const detailFishingList = async (id, page) => {
+  try {
+    const res = await axios.get(
+      `/api/fishingInfo/detailList?page=${page}&ship_id=${id}`,
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
