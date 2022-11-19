@@ -25,6 +25,7 @@ const Index = () => {
 
   const fetchShipList = async (content) => {
     const data = await fishingList(inputs, content);
+    console.log('심플리스트', data);
     setShipList(data.data);
   };
 

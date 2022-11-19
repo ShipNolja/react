@@ -54,7 +54,10 @@ function App() {
             <Route idnex path='/' element={<Index />} />
             <Route path='/index' element={<Index />} />
             <Route path='/fishinglist' element={<Index />} />
-            <Route path='/reservation/:fishingId' element={<Reservation />} />
+            <Route
+              path='/reservation/:shipId/:fishingInfo'
+              element={<Reservation />}
+            />
             <Route
               path='/detailFishinglist/:shipId'
               element={<DetailFishinglist />}

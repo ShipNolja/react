@@ -15,20 +15,24 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 const DetailShip = ({ item }) => {
   const {
-    id,
+    fishingInfoId,
+    shipInfoId,
     area,
     port,
     shipName,
     infoStartDate,
-    startTime,
-    endTime,
+    infoMessage,
+    infoNotice,
+    infoStartTime,
+    infoEndTime,
     target,
     infoCapacity,
   } = item;
 
   //startTime.slice(-8, 5);
-  const infoStartTime = startTime.slice(-8, 5); // 23:00:00
-  const infoendTime = endTime.slice(-8, 5);
+  console.log(item);
+  const startTime = infoStartTime.slice(-8, 5); // 23:00:00
+  const endTime = infoEndTime.slice(-8, 5);
 
   return (
     <Box
@@ -65,25 +69,25 @@ const DetailShip = ({ item }) => {
         }}
       >
         <div>
-          <span>공지사항</span>
-          <SubContent></SubContent>
+          <Notice>공지사항(필독) :</Notice>
+          <NoticeContent>{infoNotice}</NoticeContent>
         </div>
         <div>
-          <span>준비물</span>
-          <SubContent></SubContent>
+          <Title>준비물 :</Title>
+          <SubContent>{infoMessage}</SubContent>
         </div>
         <div>
-          <SubTitle>출항일시</SubTitle>
+          <SubTitle>출항일시 :</SubTitle>
           <SubContent>
-            ( {infoStartDate} {infoStartTime} ~ {infoendTime} )
+            {infoStartDate} {startTime} ~ {endTime}
           </SubContent>
         </div>
         <div>
-          <SubTitle>대상어종</SubTitle>
-          <SubContent>{target}</SubContent>
+          <SubTitle>대상어종 : </SubTitle>
+          <Target>{target}</Target>
         </div>
         <div>
-          <SubTitle>수용인원</SubTitle>
+          <SubTitle>수용인원 :</SubTitle>
           <SubContent>{infoCapacity}</SubContent>
         </div>
         <div style={{ width: '100%', textAlign: 'right' }}>
@@ -92,7 +96,7 @@ const DetailShip = ({ item }) => {
             style={{ padding: '8px', marginRight: '10px' }}
             onClick={() =>
               window.open(
-                `/reservation/${id}`,
+                `/reservation/${shipInfoId}/${fishingInfoId}`,
                 '예약창',
                 'width=700px,height=600px,scrollbars=yes',
               )
@@ -108,6 +112,26 @@ const DetailShip = ({ item }) => {
 
 export default DetailShip;
 
+const Title = styled.span`
+  font-size: 20px;
+  margin-right: 10px;
+`;
+
+const Notice = styled.span`
+  font-size: 20px;
+  margin-right: 10px;
+  color: #5550e4;
+`;
+
+const NoticeContent = styled.span`
+  font-size: 16px;
+  color: #5550e4;
+`;
+
+const Target = styled.span`
+  color: #43aefa;
+`;
+
 const ShipName = styled.span`
   font-size: 20px;
   font-weight: 600;
@@ -122,7 +146,7 @@ const ShipArea = styled.span`
 
 const SubTitle = styled.span`
   color: #7f7f7f;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 00;
   margin-right: 5px;
 `;
