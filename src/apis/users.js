@@ -52,9 +52,13 @@ export const userInfo = async () => {
 };
 
 // ---------------------------출조 예약하기 -----------------------------
-export const reservation = async (reservationData) => {
+export const reservation = async (shipId, infoId, reservationData) => {
   try {
-    const data = await instance.post('/user/reservation', reservationData);
+    console.log(reservationData);
+    const data = await instance.post(
+      `/user/reservation?ship_id=${shipId}&info_id=${infoId}`,
+      reservationData,
+    );
 
     return data;
   } catch (error) {
