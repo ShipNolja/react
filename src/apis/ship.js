@@ -56,3 +56,32 @@ export const addFishingInfo = async (data) => {
     console.log(error);
   }
 };
+
+// ----------------------출조 리스트 ------------------------
+export const fishingList = async (
+  { page, sortBy, sortMethod, searchBy, target, infoStartDate },
+  content,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/fishingInfo/simpleList?page=${page}&sortBy=${sortBy}&sortMethod=${sortMethod}&searchBy=${searchBy}&content=${content}&target=${target}&infoStartDate=${infoStartDate}`,
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// ----------------------해당 선박 출조 상세 리스트-------------------
+export const detailFishingList = async (id, page) => {
+  try {
+    const res = await axios.get(
+      `/api/fishingInfo/detailList?page=${page}&ship_id=${id}`,
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

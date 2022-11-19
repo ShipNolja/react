@@ -11,9 +11,9 @@ import {
 } from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setRefreshToken } from '../redux/Auth/cookie';
-import { userLogin } from '../apis/users';
-import { SET_TOKEN } from '../redux/Auth/auth';
+import { setRefreshToken } from '../../redux/Auth/cookie';
+import { userLogin } from '../../apis/users';
+import { SET_TOKEN } from '../../redux/Auth/auth';
 
 const Login = () => {
   const dispatch = useDispatch();

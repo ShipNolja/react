@@ -2,19 +2,22 @@ import { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Footer from './components/Layout/Footer';
+import Header from './components/Layout/Header';
 import Index from './pages/Index';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import MyPage from './pages/MyPage';
 
-import Box from '@mui/material/Box';
+import { Box, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { INQUIRE_TOKEN } from './redux/Auth/auth';
 import { userInfo } from './apis/users';
 import { setLocalStoarge } from './utils/setLocalStoarge';
 import { shipInfo } from './apis/ship';
+import ShipList from './components/shipList/ShipList';
+import Reservation from './components/Reservation';
+import DetailFishinglist from './components/realTimeReservation/DetailFishingList';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,14 +49,23 @@ function App() {
       <GlobalStyle />
       <Header isAuth={isLoginAuth} />
       <Box sx={{ width: '100%', height: '100vh' }}>
-        <Routes>
-          <Route idnex path='/' element={<Index />} />
-          <Route path='/index' element={<Index />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/mypage/*' element={<MyPage />} />
-          <Route path='*' element={<Index />} />
-        </Routes>
+        <Container component='main' maxWidth='md'>
+          <Routes>
+            <Route idnex path='/' element={<Index />} />
+            <Route path='/index' element={<Index />} />
+            <Route path='/fishinglist' element={<Index />} />
+            <Route path='/reservation/:fishingId' element={<Reservation />} />
+            <Route
+              path='/detailFishinglist/:shipId'
+              element={<DetailFishinglist />}
+            />
+            <Route path='/shipList' element={<ShipList />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/register' element={<RegisterPage />} />
+            <Route path='/mypage/*' element={<MyPage />} />
+            <Route path='*' element={<Index />} />
+          </Routes>
+        </Container>
       </Box>
       <Footer />
     </BrowserRouter>

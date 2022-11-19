@@ -2,30 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Grid } from '@mui/material/';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import IndexSearchNav from '../components/realTimeReservation/IndexSearchNav';
-import Ship from '../components/realTimeReservation/Ship';
-import { fishingList } from '../apis/ship';
+import ShipListSearchNav from '../shipList/ShipListSearchNav';
+import Ship from '../realTimeReservation/Ship';
+import { fishingList } from '../../apis/ship';
 
-const TIME_ZONE = 3240 * 10000;
-
-const Index = () => {
+const ShipList = () => {
   const [shipList, setShipList] = useState([]);
   const [content, setContent] = useState('');
-  const [startDate, setStartDate] = useState(
-    new Date(+new Date() + TIME_ZONE).toISOString().split('T')[0],
-  );
   const [inputs, setInputs] = useState({
     page: 0,
-    sortBy: 'infoStartDate',
+    sortBy: 'name',
     sortMethod: 'desc',
-    searchBy: '지역',
-    target: '전체',
-    infoStartDate: startDate,
+    searchBy: 'shipName',
   });
 
   const fetchShipList = async (content) => {
-    const data = await fishingList(inputs, content);
-    setShipList(data.data);
+    // const data = await fishingList(inputs, content);
+    // setShipList(data.data);
   };
 
   const onChange = (e) => {
@@ -46,10 +39,10 @@ const Index = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography component='h1' variant='h5' sx={{ textAlign: 'center' }}>
-            실시간 예약
+            선박검색
           </Typography>
         </Grid>
-        <IndexSearchNav
+        <ShipListSearchNav
           searchValue={inputs}
           onChangeInput={onChange}
           setContent={setContent}
@@ -84,4 +77,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default ShipList;

@@ -86,7 +86,7 @@ const AddFishing = () => {
     console.log(fishingData);
 
     const res = await addFishingInfo(fishingData);
-    console.log(res);
+    alert('출조등록을 완료하였습니다!');
     navigate('/');
   };
 

@@ -50,3 +50,14 @@ export const userInfo = async () => {
     console.log(error);
   }
 };
+
+// ---------------------------출조 예약하기 -----------------------------
+export const reservation = async (reservationData) => {
+  try {
+    const data = await instance.post('/user/reservation', reservationData);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
