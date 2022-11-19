@@ -11,6 +11,7 @@ import {
   MenuItem,
   Container,
   InputLabel,
+  Typography,
 } from '@mui/material/';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -113,20 +114,20 @@ const AddFishing = () => {
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
+      <Grid item xs={12}>
+        <Typography component='h1' variant='h5' sx={{ textAlign: 'center' }}>
+          출조등록
+        </Typography>
+      </Grid>
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 5,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <Box
-          component='form'
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{ mt: 3 }}
-        >
+        <Box component='form' noValidate onSubmit={handleSubmit(onSubmit)}>
           <FormControl component='fieldset' variant='standard'>
             <Grid container spacing={2}>
               <Grid item xs={6}>
