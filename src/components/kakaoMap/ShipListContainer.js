@@ -102,14 +102,15 @@ const ShipListContainer = ({ positions }) => {
         style={{
           width: '60%',
           height: '500px',
+          marginRight: '10px',
         }}
       ></div>
       <div
         id='result-list'
-        style={{ backgroundColor: '#fdeq33', width: '40%' }}
+        style={{ backgroundColor: '#fdeq33', width: '40%', height: '500px' }}
       >
         {area.map((item, i) => (
-          <div key={i} style={{ marginTop: '20px', display: 'flex' }}>
+          <div key={i} style={{ marginTop: '10px', display: 'flex' }}>
             <span style={{ marginRight: '10px' }}>{i + 1}</span>
             <div>
               <h5>{item.text}</h5>
