@@ -1,34 +1,26 @@
 import React from 'react';
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  FormControl,
-  Grid,
-  Box,
-  Typography,
-  Container,
-} from '@mui/material/';
+import { Button, Box } from '@mui/material/';
 import styled from 'styled-components';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Ship = ({ item }) => {
   const navigate = useNavigate();
   const {
-    id,
+    fishingInfoId,
+    shipInfoId,
     area,
     port,
     shipName,
     infoStartDate,
-    startTime,
-    endTime,
+    infoStartTime,
+    infoEndTime,
     target,
     infoCapacity,
   } = item;
 
-  const infoStartTime = startTime.slice(-8, 5); // 23:00:00
-  const infoendTime = endTime.slice(-8, 5);
+  //
+  const startTime = infoStartTime.slice(-8, 5);
+  const endTime = infoEndTime.slice(-8, 5);
 
   return (
     <Box
@@ -61,7 +53,7 @@ const Ship = ({ item }) => {
         <div>
           <SubTitle>출항일시</SubTitle>
           <SubContent>
-            ( {infoStartDate} {infoStartTime} ~ {infoendTime} )
+            ( {infoStartDate} {startTime} ~ {endTime} )
           </SubContent>
         </div>
         <div>
@@ -78,7 +70,7 @@ const Ship = ({ item }) => {
             style={{ padding: '8px', marginRight: '10px' }}
             onClick={() =>
               window.open(
-                `/reservation/${id}`,
+                `/reservation/${shipInfoId}/${fishingInfoId}`,
                 '예약창',
                 'width=700px,height=600px,scrollbars=yes',
               )
@@ -89,7 +81,7 @@ const Ship = ({ item }) => {
           <Button
             variant='contained'
             style={{ padding: '8px' }}
-            onClick={() => navigate(`/detailFishinglist/${ship_id}`)}
+            onClick={() => navigate(`/detailFishinglist/${shipInfoId}`)}
           >
             상세정보
           </Button>

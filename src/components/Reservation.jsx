@@ -8,14 +8,15 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { reservation } from '../apis/users';
 
 const Reservation = () => {
   const params = useParams();
   const [capacity, setCapactiy] = useState(1);
-  // 배아이디
-  console.log(params.fishingId);
+  const navigate = useNavigate();
+  // 배아이디 : shipId
+  // 출저정보 아이디 : fishingInfo
   const {
     register,
     handleSubmit,
@@ -40,7 +41,19 @@ const Reservation = () => {
       userMessage,
     };
 
-    const res = await reservation(reservationData);
+    const res = await reservation(
+      params.shipId,
+      params.fishingInfo,
+      reservationData,
+    );
+
+    if (res.data.id <= 0) {
+      alert(res.data.message);
+      return;
+    }
+
+    alert(res.data.message);
+    window.close();
     console.log(res);
   };
 
@@ -57,7 +70,6 @@ const Reservation = () => {
         onSubmit={handleSubmit(onSubmit)}
         sx={{ mt: 3 }}
       >
-        {' '}
         <FormControl component='fieldset' variant='standard'>
           <Grid container spacing={2}>
             <Grid item xs={12}>

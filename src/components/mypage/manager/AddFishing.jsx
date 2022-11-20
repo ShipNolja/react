@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Avatar,
   Button,
@@ -11,6 +11,7 @@ import {
   MenuItem,
   Container,
   InputLabel,
+  Typography,
 } from '@mui/material/';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -20,6 +21,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 import { addFishingInfo } from '../../../apis/ship';
 import { setDate, setTime } from '../../../utils/date';
+import { fishCategory } from '../../../apis/category';
 
 const AddFishing = () => {
   const navigate = useNavigate();
@@ -33,6 +35,8 @@ const AddFishing = () => {
   const [isSelected, setIsSelected] = useState(false);
   // 수용인원
   const [capacity, setCapacity] = useState(1);
+  // 카테고리
+  const [category, setCategory] = useState([]);
 
   // 시작 시간이 선택되면 해당 시간 적용 및 isSelected를 true, endTime을 null로
   const onSelect = (time) => {
@@ -55,6 +59,11 @@ const AddFishing = () => {
     setValue,
     formState: { errors },
   } = useForm();
+
+  const fetchCategory = async () => {
+    const data = await fishCategory();
+    setCategory(data.data);
+  };
 
   const onSubmit = async (data) => {
     const {
@@ -98,29 +107,33 @@ const AddFishing = () => {
     return currentDate.getTime() < selectedDate.getTime();
   };
 
+  useEffect(() => {
+    fetchCategory();
+  }, []);
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
+      <Grid item xs={12}>
+        <Typography component='h1' variant='h5' sx={{ textAlign: 'center' }}>
+          출조등록
+        </Typography>
+      </Grid>
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 5,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <Box
-          component='form'
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{ mt: 3 }}
-        >
+        <Box component='form' noValidate onSubmit={handleSubmit(onSubmit)}>
           <FormControl component='fieldset' variant='standard'>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <FormControl fullWidth>
                   <InputLabel id='demo-simple-select-label'>
-                    예약상태(infoReservationStatus)
+                    예약상태
                   </InputLabel>
                   <Select
                     labelId='demo-simple-select-label'
@@ -137,19 +150,21 @@ const AddFishing = () => {
               </Grid>
               <Grid item xs={6}>
                 <FormControl fullWidth>
-                  <InputLabel id='demo-simple-select-label'>
-                    어종(infoTarget)
-                  </InputLabel>
+                  <InputLabel id='demo-simple-select-label'>어종</InputLabel>
                   <Select
                     labelId='demo-simple-select-label'
                     label='어종'
-                    defaultValue='광어/우럭'
+                    defaultValue='광어'
                     style={{ width: '100%', height: '100%' }}
                     {...register('target', {})}
                   >
-                    <MenuItem value='광어/우럭' selected>
-                      광어/우럭
-                    </MenuItem>
+                    {category
+                      .filter((cate) => cate.name !== '전체')
+                      .map((item) => (
+                        <MenuItem key={item.id} value={item.name}>
+                          {item.name}
+                        </MenuItem>
+                      ))}
                   </Select>
                 </FormControl>
               </Grid>
