@@ -50,9 +50,10 @@ const IndexSearchNav = ({ searchValue, onChangeInput, setContent }) => {
             onChange={onChangeInput}
             style={{ width: '100%', height: '100%' }}
           >
-            <MenuItem value='지역' selected>
-              지역
+            <MenuItem value='' selected>
+              상관없음
             </MenuItem>
+            <MenuItem value='지역'>지역</MenuItem>
             <MenuItem value='상세지역'>상세지역</MenuItem>
             <MenuItem value='항구'>항구</MenuItem>
             <MenuItem value='선박명'>선박명</MenuItem>

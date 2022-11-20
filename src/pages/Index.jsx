@@ -18,13 +18,14 @@ const Index = () => {
     page: 0,
     sortBy: 'infoStartDate',
     sortMethod: 'desc',
-    searchBy: '지역',
+    searchBy: '',
     target: '전체',
     infoStartDate: startDate,
   });
 
   const fetchShipList = async (content) => {
     const data = await fishingList(inputs, content);
+    console.log(inputs);
     console.log('심플리스트', data);
     setShipList(data.data);
   };
