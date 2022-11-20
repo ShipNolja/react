@@ -72,7 +72,7 @@ const Ship = ({ item }) => {
               window.open(
                 `/reservation/${shipInfoId}/${fishingInfoId}`,
                 '예약창',
-                'width=700px,height=600px,scrollbars=yes',
+                'width=700px,height=700px,scrollbars=yes',
               )
             }
           >

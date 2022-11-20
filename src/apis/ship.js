@@ -85,3 +85,16 @@ export const detailFishingList = async (id, page) => {
     console.log(error);
   }
 };
+
+// -----------------------출조정보에 대한 상세 정보----------------
+export const resvervationInfo = async (id) => {
+  try {
+    const res = await axios.get(
+      `/api/fishingInfo/reservationPage?fishingInfo_id=${id}`,
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
