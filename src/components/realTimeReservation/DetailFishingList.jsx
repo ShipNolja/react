@@ -2,7 +2,7 @@ import { Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { detailFishingList } from '../../apis/ship';
-import DetailShip from './DetailShip';
+import DetailFishingInfo from './DetailFishingInfo';
 
 const DetailFishingList = () => {
   const [shipList, setShipList] = useState([]);
@@ -28,7 +28,7 @@ const DetailFishingList = () => {
       </Grid>
       {shipList.map((item) => (
         <Grid item xs={12}>
-          <DetailShip key={item.id} item={item} />
+          <DetailFishingInfo key={item.id} item={item} />
         </Grid>
       ))}
     </Grid>

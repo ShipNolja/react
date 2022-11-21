@@ -20,7 +20,7 @@ import { fishCategory } from '../../apis/category';
 const IndexSearchNav = ({ searchValue, onChangeInput, setContent }) => {
   const contentRef = useRef(null);
 
-  const { sortBy, sortMethod, searchBy } = searchValue; // 비구조화 할당을 통해 값 추출
+  const { sortBy, sortMethod, searchRequirements } = searchValue; // 비구조화 할당을 통해 값 추출
 
   const searchHandler = () => {
     setContent(contentRef.current.value);
@@ -34,9 +34,8 @@ const IndexSearchNav = ({ searchValue, onChangeInput, setContent }) => {
           <Select
             labelId='demo-simple-select-label'
             label='검색기준'
-            defaultValue='배이름'
-            name='searchBy'
-            value={searchBy}
+            name='searchRequirements'
+            value={searchRequirements}
             onChange={onChangeInput}
             style={{ width: '100%', height: '100%' }}
           >
@@ -44,8 +43,8 @@ const IndexSearchNav = ({ searchValue, onChangeInput, setContent }) => {
               배이름
             </MenuItem>
             <MenuItem value='port'>항구</MenuItem>
-            <MenuItem value='area'>항구</MenuItem>
-            <MenuItem value='detailArea'>선박명</MenuItem>
+            <MenuItem value='area'>지역</MenuItem>
+            <MenuItem value='detailArea'>세부지역</MenuItem>
           </Select>
         </FormControl>
       </Grid>

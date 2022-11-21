@@ -3,7 +3,7 @@ import { Typography, Grid } from '@mui/material/';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import IndexSearchNav from '../components/realTimeReservation/IndexSearchNav';
-import Ship from '../components/realTimeReservation/Ship';
+import SimpleFishingInfo from '../components/realTimeReservation/SimpleFishingInfo';
 import { fishingList } from '../apis/ship';
 
 const TIME_ZONE = 3240 * 10000;
@@ -66,7 +66,7 @@ const Index = () => {
         ) : (
           shipList.map((data) => (
             <Grid item sm={6} xs={12}>
-              <Ship key={data.id} item={data} />
+              <SimpleFishingInfo key={data.id} item={data} />
             </Grid>
           ))
         )}
