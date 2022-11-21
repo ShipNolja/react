@@ -71,7 +71,6 @@ function App() {
           </Routes>
         </Container>
       </Box>
-      <Footer />
     </BrowserRouter>
   );
 }
