@@ -126,3 +126,19 @@ export const getShipInfo = async (id) => {
     console.log(error);
   }
 };
+
+// ---------------------선박 예약 목록 -----------------
+export const shipReservationList = async (
+  { page, searchBy, sortMethod },
+  content,
+) => {
+  try {
+    const res = await instance.get(
+      `/manager/reservationList?page=${page}&searchBy=${searchBy}&content=${content}&sortMethod=${sortMethod}`,
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

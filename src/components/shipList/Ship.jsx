@@ -20,7 +20,8 @@ const Ship = ({ item }) => {
   return (
     <Box
       sx={{
-        border: 'solid 1px #7f7f7f;',
+        border: 'solid 2px #929191;',
+        borderRadius: 5,
         display: 'flex',
         height: 150,
         padding: '15px',

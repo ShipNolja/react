@@ -16,9 +16,8 @@ import { userInfo } from './apis/users';
 import { setLocalStoarge } from './utils/setLocalStoarge';
 import { shipInfo } from './apis/ship';
 import ShipListIndex from './pages/ShipListIndex';
-import Reservation from './components/Reservation';
+import AddReservation from './components/reservation/AddReservation';
 import DetailFishinglist from './components/realTimeReservation/DetailFishingList';
-import ShipDetailIndex from './components/shipList/ShipDetailIndex';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,15 +27,15 @@ function App() {
   const [isLoginAuth, setIsLoginAuth] = useState(false);
   const isAuth = useSelector((state) => state.token.authenticated);
 
+  const fetchUserData = async () => {
+    const data = await userInfo();
+    setLocalStoarge('user', data);
+    const shipdata = await shipInfo();
+    setLocalStoarge('ship', shipdata);
+  };
+
   useEffect(() => {
     setIsLoginAuth(isAuth);
-
-    const fetchUserData = async () => {
-      const data = await userInfo();
-      setLocalStoarge('user', data);
-      const shipdata = await shipInfo();
-      setLocalStoarge('ship', shipdata);
-    };
 
     if (isToken) {
       setIsLoginAuth(true);
@@ -57,7 +56,7 @@ function App() {
             <Route path='/fishinglist' element={<Index />} />
             <Route
               path='/reservation/:shipId/:fishingInfo'
-              element={<Reservation />}
+              element={<AddReservation />}
             />
             <Route
               path='/detailFishinglist/:shipId'

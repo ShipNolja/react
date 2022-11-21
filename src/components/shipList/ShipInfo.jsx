@@ -15,11 +15,12 @@ const ShipInfo = () => {
     detailArea,
     name,
     port,
+    image,
     userName,
     streetAddress,
     userPhone,
     registerNumber,
-    shipRationgAvg,
+    shipRatingAvg,
     wishCount,
   } = shipData;
 
@@ -27,6 +28,7 @@ const ShipInfo = () => {
 
   const fetchShipInfo = async () => {
     const data = await getShipInfo(shipId);
+    console.log(data);
     setShipData(data.data);
   };
   useEffect(() => {
@@ -35,6 +37,9 @@ const ShipInfo = () => {
   return (
     <Box noValidate sx={{ mt: 3 }}>
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <img src={image} width='100%' />
+        </Grid>
         <Grid item xs={3}>
           <TextField
             fullWidth
@@ -73,7 +78,7 @@ const ShipInfo = () => {
             }}
             inputProps={{
               readOnly: true,
-              value: shipRationgAvg,
+              value: shipRatingAvg,
             }}
           />
         </Grid>

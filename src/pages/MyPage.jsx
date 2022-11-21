@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import MyInfo from '../components/mypage/MyInfo';
 import MyPageNav from '../components/mypage/MyPageNav';
 import ShipRegister from '../components/mypage/user/ShipRegister';
-import Reservation from '../components/mypage/user/Reservation';
+import ReservationList from '../components/mypage/user/ReservationList';
 import AddFishing from '../components/mypage/manager/AddFishing';
-import ShipReservation from '../components/mypage/manager/ShipReservation';
+import ShipReservationList from '../components/mypage/manager/ShipReservationList';
 import ShipInfo from '../components/mypage/manager/ShipInfo';
 
 const MyPage = () => {
@@ -21,12 +21,12 @@ const MyPage = () => {
       {isUser}
       <Routes>
         <Route path='profile' element={<MyInfo />}></Route>
-        <Route path='reservation' element={<Reservation />}></Route>
+        <Route path='reservation' element={<ReservationList />}></Route>
         <Route path='shipRegister' element={<ShipRegister />}></Route>
 
         <Route path='shipInfo' element={<ShipInfo />}></Route>
         <Route path='addFishing' element={<AddFishing />}></Route>
-        <Route path='shipReservation' element={<ShipReservation />}></Route>
+        <Route path='shipReservation' element={<ShipReservationList />}></Route>
       </Routes>
     </>
   );

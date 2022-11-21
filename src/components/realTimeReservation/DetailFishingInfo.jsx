@@ -20,6 +20,7 @@ const DetailShip = ({ item }) => {
     area,
     port,
     shipName,
+    image,
     infoStartDate,
     infoMessage,
     infoNotice,
@@ -55,8 +56,13 @@ const DetailShip = ({ item }) => {
         }}
       >
         <div>
-          <ShipName>{shipName}</ShipName>
-          <ShipArea>{`( ${area}, ${port} )`}</ShipArea>
+          <div style={{ textAlign: 'center' }}>
+            <ShipName>{shipName}</ShipName>
+            <ShipArea>{`( ${area}, ${port} )`}</ShipArea>
+          </div>
+          <div>
+            <img src={image} width='100%' />
+          </div>
         </div>
       </Box>
       <Box
