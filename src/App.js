@@ -27,15 +27,15 @@ function App() {
   const [isLoginAuth, setIsLoginAuth] = useState(false);
   const isAuth = useSelector((state) => state.token.authenticated);
 
+  const fetchUserData = async () => {
+    const data = await userInfo();
+    setLocalStoarge('user', data);
+    const shipdata = await shipInfo();
+    setLocalStoarge('ship', shipdata);
+  };
+
   useEffect(() => {
     setIsLoginAuth(isAuth);
-
-    const fetchUserData = async () => {
-      const data = await userInfo();
-      setLocalStoarge('user', data);
-      const shipdata = await shipInfo();
-      setLocalStoarge('ship', shipdata);
-    };
 
     if (isToken) {
       setIsLoginAuth(true);

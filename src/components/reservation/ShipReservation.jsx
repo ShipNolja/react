@@ -27,6 +27,7 @@ const Reservation = ({ item }) => {
         variant='contained'
         style={{ padding: '8px' }}
         onClick={() => console.log('방문완료로 변경되었습니다')}
+        sx={{ backgroundColor: '#2e9f55' }}
       >
         방문완료
       </Button>

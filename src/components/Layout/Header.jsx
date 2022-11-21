@@ -25,7 +25,7 @@ const Header = ({ isAuth }) => {
       <Grid xs={12} item={true} sx={{ height: '60px' }}>
         <HeaderWrap>
           <div>
-            <div>로고자리</div>
+            <div>쉽놀자</div>
           </div>
           {!isAuth && (
             <>

@@ -15,6 +15,7 @@ const ShipInfo = () => {
     detailArea,
     name,
     port,
+    image,
     userName,
     streetAddress,
     userPhone,
@@ -36,6 +37,9 @@ const ShipInfo = () => {
   return (
     <Box noValidate sx={{ mt: 3 }}>
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <img src={image} width='100%' />
+        </Grid>
         <Grid item xs={3}>
           <TextField
             fullWidth
