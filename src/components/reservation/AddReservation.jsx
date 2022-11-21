@@ -10,10 +10,10 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { resvervationInfo } from '../apis/ship';
-import { reservation } from '../apis/users';
+import { resvervationInfo } from '../../apis/ship';
+import { reservation } from '../../apis/users';
 
-const Reservation = () => {
+const AddReservation = () => {
   const params = useParams();
   const [capacity, setCapactiy] = useState(1);
   const [infoData, setInfoData] = useState({});
@@ -208,7 +208,7 @@ const Reservation = () => {
   );
 };
 
-export default Reservation;
+export default AddReservation;
 
 const MainTitle = styled.span`
   font-size: large;

@@ -16,9 +16,8 @@ import { userInfo } from './apis/users';
 import { setLocalStoarge } from './utils/setLocalStoarge';
 import { shipInfo } from './apis/ship';
 import ShipListIndex from './pages/ShipListIndex';
-import Reservation from './components/Reservation';
+import AddReservation from './components/reservation/AddReservation';
 import DetailFishinglist from './components/realTimeReservation/DetailFishingList';
-import ShipDetailIndex from './components/shipList/ShipDetailIndex';
 
 function App() {
   const dispatch = useDispatch();
@@ -57,7 +56,7 @@ function App() {
             <Route path='/fishinglist' element={<Index />} />
             <Route
               path='/reservation/:shipId/:fishingInfo'
-              element={<Reservation />}
+              element={<AddReservation />}
             />
             <Route
               path='/detailFishinglist/:shipId'

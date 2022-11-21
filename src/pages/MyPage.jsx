@@ -5,7 +5,7 @@ import MyPageNav from '../components/mypage/MyPageNav';
 import ShipRegister from '../components/mypage/user/ShipRegister';
 import ReservationList from '../components/mypage/user/ReservationList';
 import AddFishing from '../components/mypage/manager/AddFishing';
-import ShipReservation from '../components/mypage/manager/ShipReservation';
+import ShipReservationList from '../components/mypage/manager/ShipReservationList';
 import ShipInfo from '../components/mypage/manager/ShipInfo';
 
 const MyPage = () => {
@@ -26,7 +26,7 @@ const MyPage = () => {
 
         <Route path='shipInfo' element={<ShipInfo />}></Route>
         <Route path='addFishing' element={<AddFishing />}></Route>
-        <Route path='shipReservation' element={<ShipReservation />}></Route>
+        <Route path='shipReservation' element={<ShipReservationList />}></Route>
       </Routes>
     </>
   );

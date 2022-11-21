@@ -9,6 +9,25 @@ const Reservation = ({ item }) => {
     reservationStatus,
     userMessage,
   } = item;
+
+  let statusBtn;
+  if (reservationStatus === '예약완료') {
+    statusBtn = (
+      <Button variant='contained' style={{ padding: '8px' }}>
+        {reservationStatus}
+      </Button>
+    );
+  } else if (reservationStatus === '방문완료') {
+    statusBtn = (
+      <Button
+        variant='contained'
+        style={{ padding: '8px' }}
+        onClick={() => console.log('방문완료')}
+      >
+        {reservationStatus}
+      </Button>
+    );
+  }
   return (
     <Box
       sx={{
@@ -43,17 +62,7 @@ const Reservation = ({ item }) => {
           <span>요청사항: </span>
           <span>{userMessage}</span>
         </div>
-        <div style={{ width: '100%', textAlign: 'right' }}>
-          {reservationStatus === '예약완료' ? (
-            <Button variant='contained' style={{ padding: '8px' }}>
-              {reservationStatus}
-            </Button>
-          ) : (
-            <Button variant='contained' style={{ padding: '8px' }}>
-              {reservationStatus}
-            </Button>
-          )}
-        </div>
+        <div style={{ width: '100%', textAlign: 'right' }}>{statusBtn}</div>
       </Box>
     </Box>
   );

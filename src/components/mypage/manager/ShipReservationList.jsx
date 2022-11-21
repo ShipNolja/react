@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReservationNav from './ReservationNav';
 import { Grid } from '@mui/material';
-import { userReservationList } from '../../../apis/users';
-import Reservation from '../../reservation/Reservation';
+import ShipReservation from '../../reservation/ShipReservation';
+import { shipReservationList } from '../../../apis/ship';
 
-const ReservationList = () => {
+const ShipReservationList = () => {
   const [reservations, setReservations] = useState([]);
   const [content, setContent] = useState('');
   const [inputs, setInputs] = useState({
@@ -22,7 +22,7 @@ const ReservationList = () => {
   };
 
   const fetchReservationList = async () => {
-    const data = await userReservationList(inputs, content);
+    const data = await shipReservationList(inputs, content);
     console.log(data);
     setReservations(data.data);
   };
@@ -41,11 +41,11 @@ const ReservationList = () => {
       />
       {reservations.map((item) => (
         <Grid item sm={6} xs={12}>
-          <Reservation key={item.reservationId} item={item} />
+          <ShipReservation key={item.reservationId} item={item} />
         </Grid>
       ))}
     </Grid>
   );
 };
 
-export default ReservationList;
+export default ShipReservationList;

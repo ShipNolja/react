@@ -19,7 +19,7 @@ const ShipInfo = () => {
     streetAddress,
     userPhone,
     registerNumber,
-    shipRationgAvg,
+    shipRatingAvg,
     wishCount,
   } = shipData;
 
@@ -27,6 +27,7 @@ const ShipInfo = () => {
 
   const fetchShipInfo = async () => {
     const data = await getShipInfo(shipId);
+    console.log(data);
     setShipData(data.data);
   };
   useEffect(() => {
@@ -73,7 +74,7 @@ const ShipInfo = () => {
             }}
             inputProps={{
               readOnly: true,
-              value: shipRationgAvg,
+              value: shipRatingAvg,
             }}
           />
         </Grid>

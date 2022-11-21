@@ -128,13 +128,13 @@ export const getShipInfo = async (id) => {
 };
 
 // ---------------------선박 예약 목록 -----------------
-export const reservationList = async (
+export const shipReservationList = async (
   { page, searchBy, sortMethod },
   content,
 ) => {
   try {
-    const res = await axios.get(
-      `/api/ship/list?page=${page}&searchRequirements=${searchRequirements}&searchWord=${content}&sortBy=${sortBy}&sortMethod=${sortMethod}`,
+    const res = await instance.get(
+      `/manager/reservationList?page=${page}&searchBy=${searchBy}&content=${content}&sortMethod=${sortMethod}`,
     );
 
     return res;
