@@ -31,8 +31,8 @@ const DetailShip = ({ item }) => {
 
   //startTime.slice(-8, 5);
   console.log(item);
-  const startTime = infoStartTime.slice(-8, 5); // 23:00:00
-  const endTime = infoEndTime.slice(-8, 5);
+  const startTime = infoStartTime?.slice(-8, 5); // 23:00:00
+  const endTime = infoEndTime?.slice(-8, 5);
 
   return (
     <Box

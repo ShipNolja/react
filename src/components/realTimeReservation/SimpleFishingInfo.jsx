@@ -20,8 +20,8 @@ const Ship = ({ item }) => {
   } = item;
 
   //
-  const startTime = infoStartTime.slice(-8, 5);
-  const endTime = infoEndTime.slice(-8, 5);
+  const startTime = infoStartTime?.slice(-8, 5);
+  const endTime = infoEndTime?.slice(-8, 5);
 
   return (
     <Box
