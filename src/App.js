@@ -15,9 +15,10 @@ import { INQUIRE_TOKEN } from './redux/Auth/auth';
 import { userInfo } from './apis/users';
 import { setLocalStoarge } from './utils/setLocalStoarge';
 import { shipInfo } from './apis/ship';
-import ShipList from './components/shipList/ShipList';
+import ShipListIndex from './pages/ShipListIndex';
 import Reservation from './components/Reservation';
 import DetailFishinglist from './components/realTimeReservation/DetailFishingList';
+import ShipDetailIndex from './components/shipList/ShipDetailIndex';
 
 function App() {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ function App() {
               path='/detailFishinglist/:shipId'
               element={<DetailFishinglist />}
             />
-            <Route path='/shipList' element={<ShipList />} />
+            <Route path='/shipList/*' element={<ShipListIndex />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/mypage/*' element={<MyPage />} />

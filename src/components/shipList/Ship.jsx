@@ -16,8 +16,6 @@ const Ship = ({ item }) => {
     wishCount,
   } = item;
 
-  console.log(item);
-
   return (
     <Box
       sx={{
@@ -66,7 +64,7 @@ const Ship = ({ item }) => {
           <Button
             variant='contained'
             style={{ padding: '8px' }}
-            onClick={() => console.log('나 실행')}
+            onClick={() => navigate(`${id}`)}
           >
             상세정보
           </Button>
