@@ -126,3 +126,19 @@ export const getShipInfo = async (id) => {
     console.log(error);
   }
 };
+
+// ---------------------선박 예약 목록 -----------------
+export const reservationList = async (
+  { page, searchBy, sortMethod },
+  content,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/ship/list?page=${page}&searchRequirements=${searchRequirements}&searchWord=${content}&sortBy=${sortBy}&sortMethod=${sortMethod}`,
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -65,3 +65,31 @@ export const reservation = async (shipId, infoId, reservationData) => {
     console.log(error);
   }
 };
+
+// --------------------------유저 예약 리스트 --------------------------
+
+// fishingInfoId: 2
+// reservationDate: "2022-11-21"
+// reservationId: 1
+// reservationName: "우영우"
+// reservationNum: 5
+// reservationPhone: "01028382322"
+// reservationStatus: "예약완료"
+// totalElement: 1
+// totalPage: 1
+// userMessage: "멀미약 준비해주세요!"
+
+export const userReservationList = async (
+  { page, searchBy, sortMethod },
+  content,
+) => {
+  try {
+    const res = await instance.get(
+      `/user/reservationList?page=${page}&searchBy=${searchBy}&content=${content}&sortMethod=${sortMethod}`,
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
