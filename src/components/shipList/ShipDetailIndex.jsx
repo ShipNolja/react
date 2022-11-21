@@ -12,8 +12,9 @@ import Review from './Review';
 const ShipDetailIndex = () => {
   const [value, setValue] = useState(0);
   const params = useParams();
-
   const navigate = useNavigate();
+
+  const id = params.shipId;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -21,26 +22,27 @@ const ShipDetailIndex = () => {
 
   console.log(params);
   return (
-    <Box sx={{}}>
+    <Box sx={{ paddingBottom: '30px' }}>
       <Tabs
         value={value}
         onChange={handleChange}
         variant='fullWidth'
         sx={{
           width: '100%',
+          marginBottom: '30px',
         }}
       >
-        <Tab label='선박정보' onClick={() => navigate('info')} />
-        <Tab label='출조정보' onClick={() => navigate('fishingInfo')} />
-        <Tab label='조황정보' onClick={() => navigate('board')} />
-        <Tab label='후기' onClick={() => navigate('review')} />
+        <Tab label='선박정보' onClick={() => navigate(`info/${id}`)} />
+        <Tab label='출조정보' onClick={() => navigate(`fishingInfo/${id}`)} />
+        <Tab label='조황정보' onClick={() => navigate(`board/${id}`)} />
+        <Tab label='후기' onClick={() => navigate(`review/${id}`)} />
       </Tabs>
 
       <Routes>
-        <Route path='info' element={<ShipInfo />} />
-        <Route path='fishingInfo' element={<FishingInfo />} />
-        <Route path='board' element={<Board />} />
-        <Route path='review' element={<Review />} />
+        <Route path='info/:shipId' element={<ShipInfo />} />
+        <Route path='fishingInfo/:shipId' element={<FishingInfo />} />
+        <Route path='board/:shipId' element={<Board />} />
+        <Route path='review/:shipId' element={<Review />} />
       </Routes>
     </Box>
   );

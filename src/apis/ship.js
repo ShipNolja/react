@@ -115,3 +115,14 @@ export const resvervationInfo = async (id) => {
     console.log(error);
   }
 };
+
+// --------------------------선상정보 가져오기 -------------------
+export const getShipInfo = async (id) => {
+  try {
+    const res = await axios.get(`/api/ship/${id}`);
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -10,6 +10,7 @@ const Ship = ({ item }) => {
     shipInfoId,
     area,
     port,
+    image,
     shipName,
     infoStartDate,
     infoStartTime,
@@ -35,7 +36,7 @@ const Ship = ({ item }) => {
         component='div'
         sx={{ width: '40%', height: '100%', marginRight: '15px' }}
       >
-        <img src='이미지' width='100%' height='100%' />
+        <img src={image} width='100%' height='100%' />
       </Box>
       <Box
         component='div'
