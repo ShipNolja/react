@@ -42,8 +42,8 @@ const Reservation = () => {
     infoMessage,
   } = infoData;
 
-  const startTime = infoStartTime.slice(-8, 5);
-  const endTime = infoEndTime.slice(-8, 5);
+  const startTime = infoStartTime?.slice(-8, 5);
+  const endTime = infoEndTime?.slice(-8, 5);
 
   const capactiyOnChange = (event) => {
     if (event.target.value <= 0) {
@@ -58,6 +58,7 @@ const Reservation = () => {
     console.log(data);
     setInfoData(data.data);
   };
+
   const onSubmit = async (data) => {
     const { reservationName, reservationPhone, userMessage } = data;
     const reservationData = {

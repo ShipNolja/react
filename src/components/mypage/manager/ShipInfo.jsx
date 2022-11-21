@@ -47,17 +47,12 @@ const ShipInfo = () => {
         <Avatar
           sx={{
             m: 1,
-            bgcolor: 'secondary.main',
             width: 100,
             height: 100,
             fontSize: 14,
             fontWeight: 'bold',
           }}
-          className='img__box'
-          style={{
-            backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/my.shipnolja.sss.bucket/fe4f56fe-d5c4-436e-8cb6-871b86a8c3e4.jpg)`,
-            backgroundSize: 'cover',
-          }}
+          src={image}
         ></Avatar>
         <Box noValidate sx={{ mt: 3 }}>
           <FormControl component='fieldset' variant='standard'>

@@ -10,6 +10,7 @@ const Ship = ({ item }) => {
     shipInfoId,
     area,
     port,
+    image,
     shipName,
     infoStartDate,
     infoStartTime,
@@ -19,8 +20,8 @@ const Ship = ({ item }) => {
   } = item;
 
   //
-  const startTime = infoStartTime.slice(-8, 5);
-  const endTime = infoEndTime.slice(-8, 5);
+  const startTime = infoStartTime?.slice(-8, 5);
+  const endTime = infoEndTime?.slice(-8, 5);
 
   return (
     <Box
@@ -35,7 +36,7 @@ const Ship = ({ item }) => {
         component='div'
         sx={{ width: '40%', height: '100%', marginRight: '15px' }}
       >
-        <img src='이미지' width='100%' height='100%' />
+        <img src={image} width='100%' height='100%' />
       </Box>
       <Box
         component='div'

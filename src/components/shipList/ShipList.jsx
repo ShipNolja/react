@@ -6,6 +6,8 @@ import ShipListSearchNav from '../shipList/ShipListSearchNav';
 import Ship from '../shipList/Ship';
 import { shipList } from '../../apis/ship';
 import ShipListContainer from '../../components/kakaoMap/ShipListContainer';
+import { Routes, Route } from 'react-router-dom';
+import ShipDetailIndex from './ShipDetailIndex';
 
 const ShipList = () => {
   const [positions, setPositions] = useState([]);
@@ -78,6 +80,9 @@ const ShipList = () => {
           ))
         )}
       </Grid>
+      <Routes>
+        <Route path='/:shipId/*' element={<ShipDetailIndex />} />
+      </Routes>
     </>
   );
 };
