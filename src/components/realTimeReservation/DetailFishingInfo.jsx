@@ -30,11 +30,6 @@ const DetailShip = ({ item }) => {
     infoCapacity,
   } = item;
 
-  //startTime.slice(-8, 5);
-  console.log(item);
-  const startTime = infoStartTime?.slice(-8, 5); // 23:00:00
-  const endTime = infoEndTime?.slice(-8, 5);
-
   return (
     <Box
       sx={{
@@ -85,7 +80,8 @@ const DetailShip = ({ item }) => {
         <div>
           <SubTitle>출항일시 :</SubTitle>
           <SubContent>
-            {infoStartDate} {startTime} ~ {endTime}
+            {infoStartDate} {infoStartTime?.slice(-8, 5)} ~{' '}
+            {infoEndTime?.slice(-8, 5)}
           </SubContent>
         </div>
         <div>
