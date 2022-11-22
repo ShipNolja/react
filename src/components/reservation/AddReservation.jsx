@@ -42,9 +42,6 @@ const AddReservation = () => {
     infoMessage,
   } = infoData;
 
-  const startTime = infoStartTime?.slice(-8, 5);
-  const endTime = infoEndTime?.slice(-8, 5);
-
   const capactiyOnChange = (event) => {
     if (event.target.value <= 0) {
       alert('올바른 인원 수를 입력해주세요!');
@@ -114,7 +111,10 @@ const AddReservation = () => {
         </div>
         <div>
           <MainTitle>출조정보: </MainTitle>
-          <MainContent>{`${infoStartDate} ${startTime}~${endTime}`}</MainContent>
+          <MainContent>{`${infoStartDate} ${infoStartTime?.slice(
+            -8,
+            5,
+          )}~${infoEndTime?.slice(-8, 5)}`}</MainContent>
         </div>
         <div>
           <MainTitle>수용인원: </MainTitle>

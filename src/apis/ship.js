@@ -91,7 +91,6 @@ export const shipList = async (
   { page, searchRequirements, sortBy, sortMethod },
   content,
 ) => {
-  console.log({ page, searchRequirements, sortBy, sortMethod }, content);
   try {
     const res = await axios.get(
       `/api/ship/list?page=${page}&searchRequirements=${searchRequirements}&searchWord=${content}&sortBy=${sortBy}&sortMethod=${sortMethod}`,
@@ -135,6 +134,20 @@ export const shipReservationList = async (
   try {
     const res = await instance.get(
       `/manager/reservationList?page=${page}&searchBy=${searchBy}&content=${content}&sortMethod=${sortMethod}`,
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// ---------------------조황 목록 출력 -----------------
+// 작성 기능이 없기 때문에 모든 정보를 불러오기 위해 임의의 값들로 파라미터를 채움
+export const getBoardList = async (page) => {
+  try {
+    const res = await axios.get(
+      `/api/fishing-condition/date/asc/${page}/?startDate=2020-11-22&endDate=2100-12-25&fish=&title`,
     );
 
     return res;

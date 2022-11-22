@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ShipInfo from './ShipInfo';
 import FishingInfo from './FishingInfo';
-import Board from './Board';
+import BoardList from './BoardList';
 import Review from './Review';
 
 const ShipDetailIndex = () => {
@@ -20,7 +20,6 @@ const ShipDetailIndex = () => {
     setValue(newValue);
   };
 
-  console.log(params);
   return (
     <Box sx={{ paddingBottom: '30px' }}>
       <Tabs
@@ -41,7 +40,7 @@ const ShipDetailIndex = () => {
       <Routes>
         <Route path='info/:shipId' element={<ShipInfo />} />
         <Route path='fishingInfo/:shipId' element={<FishingInfo />} />
-        <Route path='board/:shipId' element={<Board />} />
+        <Route path='board/:shipId' element={<BoardList />} />
         <Route path='review/:shipId' element={<Review />} />
       </Routes>
     </Box>

@@ -21,7 +21,6 @@ const ShipList = () => {
 
   const fetchShipList = async (content) => {
     const data = await shipList(inputs, content);
-    console.log(inputs);
     setPositions(data.data);
   };
 
