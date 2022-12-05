@@ -7,8 +7,6 @@ import {
   FormControl,
   Grid,
   Box,
-  Typography,
-  Container,
 } from '@mui/material/';
 import styled from 'styled-components';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -33,7 +31,7 @@ const DetailShip = ({ item }) => {
   return (
     <Box
       sx={{
-        border: 'solid 1px #7f7f7f;',
+        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.3)',
         display: 'flex',
         height: 200,
         padding: '15px',
